@@ -1,0 +1,19 @@
+<fonts>
+	<font id="qrcode1" filename="qrcode-1.fnt" filter="0123456789abcdef"/>
+	<font id="qrcode2" filename="qrcode-2.fnt" filter="0123456789abcdef"/>
+	<font id="qrcode3" filename="qrcode-3.fnt" filter="0123456789abcdef"/>
+	<font id="qrcode4" filename="qrcode-4.fnt" filter="0123456789abcdef"/>
+	<font id="qrcode5" filename="qrcode-5.fnt" filter="0123456789abcdef"/>
+	<font id="qrcode6" filename="qrcode-6.fnt" filter="0123456789abcdef"/>
+	<font id="qrcode7" filename="qrcode-7.fnt" filter="0123456789abcdef"/>
+	<font id="qrcode8" filename="qrcode-8.fnt" filter="0123456789abcdef"/>
+	<font id="qrcode9" filename="qrcode-9.fnt" filter="0123456789abcdef"/>
+	<font id="qrcode10" filename="qrcode-10.fnt" filter="0123456789abcdef"/>
+	<font id="qrcode11" filename="qrcode-11.fnt" filter="0123456789abcdef"/>
+	<font id="qrcode12" filename="qrcode-12.fnt" filter="0123456789abcdef"/>
+	<font id="qrcode13" filename="qrcode-13.fnt" filter="0123456789abcdef"/>
+	<font id="qrcode14" filename="qrcode-14.fnt" filter="0123456789abcdef"/>
+	<font id="qrcode15" filename="qrcode-15.fnt" filter="0123456789abcdef"/>
+	<font id="qrcode16" filename="qrcode-16.fnt" filter="0123456789abcdef"/>
+</fonts>
+

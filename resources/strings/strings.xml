@@ -1,0 +1,11 @@
+<strings>
+    <string id="AppName">Barcode Wallet</string>
+	<string id="mainMenuTitle">Select barcode</string>
+
+	<string id="error">Error</string>
+	<string id="errorNoBarcode">No barcode</string>
+
+	<string id="token">Token</string>
+	<string id="displayLabel">Display label</string> 
+
+</strings>
