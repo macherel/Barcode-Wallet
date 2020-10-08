@@ -5,11 +5,12 @@ using Toybox.System as System;
 
 module Settings {
 
+	var debug = false;
 	var token;
 	var displayLabel;
 	var codes = null;
 	var currentIndex = null;
-	var state = :UNKNOWN;
+	var state = :UNKNOWN; // UNKNOWN, READY, ERROR, LOADING, NO_TOKEN
 	var responseCode = null;
 
 	function getToken() {
@@ -26,15 +27,18 @@ module Settings {
 	}
 
 	function load() {
+		codes = _loadCodes();
 		token = _getProperty("token");
+		debug = _getProperty("debug");
 		displayLabel = _getProperty("displayLabel");
 		currentIndex = _getProperty("currentIndex");
-		if(currentIndex == null) {
+		if (currentIndex == null) {
 			currentIndex = 0;
 		}
+		validateCurrentIndex();
 	}
 
-	function loadCodes() {
+	function _loadCodes() {
 		codes = [];
 		var i = 0;
 		var code = _loadCode(i);
@@ -43,12 +47,20 @@ module Settings {
 			i++;
 			code = _loadCode(i);
 		}
+		return codes;
 	}
 	
 	function storeCodes(newCodes) {
 		codes = newCodes;
 		for(var i=0; i<codes.size(); i++) {
 			_storeCode(codes[i]);
+		}
+		validateCurrentIndex();
+	}
+
+	function validateCurrentIndex() {
+		if (currentIndex > codes.size()-1) {
+			setCurrentIndex(codes.size()-1);
 		}
 	}
 
@@ -57,8 +69,8 @@ module Settings {
 			App.Storage.setValue(
 				"code#" + code.id,
 				{
-					:label => label,
-					:data => data,
+					"label" => code.label,
+					"data" => code.data,
 				}
 			);
 		} else {
@@ -73,14 +85,14 @@ module Settings {
 		var data = null;
 		if (App has :Storage) {
 			var code = App.Storage.getValue("code#" + id);
-			if(code != null) {
-				return new Code(id, code[:label], code[:data]);
+			if (code != null) {
+				return new Code(id, code["label"], code["data"]);
 			}
 		} else {
 			var app = App.getApp();
 			var label= app.getProperty("code#" + id + "-label");
 			var data = app.getProperty("code#" + id + "-data");
-			if(data != null) {
+			if (data != null) {
 				return new Code(id, label, data);
 			}
 		}

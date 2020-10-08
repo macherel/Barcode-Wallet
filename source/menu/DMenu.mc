@@ -79,7 +79,7 @@ class DMenuItem
 			// Show label and value.
 			var val = value.toString ();
 			var index = val.find("\n");
-			if(index != null) {
+			if (index != null) {
 				val = val.substring(0, index);
 			}
 			var valDims = dc.getTextDimensions (val, VALUE_FONT);
@@ -180,7 +180,7 @@ class DMenu extends Ui.View
 	
 	function onUpdate (dc)
 	{
-		if(drawMenu == null) {
+		if (drawMenu == null) {
 			return;
 		}
 		var width = dc.getWidth ();

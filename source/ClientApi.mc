@@ -13,12 +13,14 @@ module ClientApi {
 				codes.add(Code.fromResponseData(i, responseCodes[i]));
 				System.println("code #" + i + " \"" + responseCodes[i]["name"] + "\" received.");
 			}
-			Settings.codes = codes;
-			Ui.requestUpdate();
+			Settings.storeCodes(codes);
+			Settings.state = :READY;
 		} else {
-			System.println("Error while loading QR codes (" + responseCode + ")");
+			Settings.state = :ERROR;
+			System.println("Error while loading user (" + responseCode + ")");
 			// nothing to do, data will be loaded next time
 		}
+		Ui.requestUpdate();
 	}
 	
 	function loadUser(token) {

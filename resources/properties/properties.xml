@@ -1,5 +1,6 @@
 <properties>
 	<property id="token" type="string"></property>
-	<property id="displayLabel" type="boolean">false</property>
+	<property id="displayLabel" type="boolean">true</property>
+	<property id="debug" type="boolean">false</property>
 	<property id="currentIndex" type="number">0</property>
 </properties>

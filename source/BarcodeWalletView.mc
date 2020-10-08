@@ -31,7 +31,7 @@ class BarcodeWalletView extends Ui.View {
 			Ui.loadResource(Rez.Fonts.qrcode15),
 			Ui.loadResource(Rez.Fonts.qrcode16)
 		];
-		System.println("resources loaded.");	
+		System.println("resources loaded.");
     }
 
     // Called when this View is brought to the foreground. Restore
@@ -49,7 +49,7 @@ class BarcodeWalletView extends Ui.View {
 		var dcHeight = dc.getHeight();
 		var maxWidth = dcWidth  * 0.8;
 		var maxHeight= dcHeight * 0.8;
-		if(maxWidth == maxHeight) {
+		if (maxWidth == maxHeight) {
 			// For round device... Otherwise image is hidden in corner
 			maxWidth = maxWidth * 0.8;
 			maxHeight = maxHeight * 0.8;
@@ -60,17 +60,36 @@ class BarcodeWalletView extends Ui.View {
 		////////////////////////////////////////////////////////////////
 		// Handle error
 		////////////////////////////////////////////////////////////////
-		if (Settings.codes == null) {
-			System.println("Waiting for codes...");
-			return false;
+		if (Settings.codes == null || Settings.debug) {
+			switch(Settings.state) {
+				case :READY:
+					break;
+				case :LOADING:
+					displayMessage(dc, Ui.loadResource(Rez.Strings.loading));
+					return false;
+				case :NO_TOKEN:
+					displayMessage(dc, Ui.loadResource(Rez.Strings.errorNoToken));
+					return false;
+				case :ERROR:
+					displayMessage(dc, Ui.loadResource(Rez.Strings.error) + " " + Settings.responseCode);
+					return false;
+				default:
+					displayMessage(dc, Ui.loadResource(Rez.Strings.errorUnknown));
+					return false;
+			}
 		}
 		if (Settings.codes.size() == 0) {
-			System.println("No code found.");
+			displayMessage(dc, Ui.loadResource(Rez.Strings.errorNoBarcode));
 			return false;
 		}
 
 		var code = Settings.codes[Settings.currentIndex];
 		var data = code.data;
+
+		if (data == null) {
+			displayMessage(dc, code.label + "\n" + Ui.loadResource(Rez.Strings.error));
+			return false;
+		}
 
 		////////////////////////////////////////////////////////////////
 		// Find font size
@@ -102,23 +121,24 @@ class BarcodeWalletView extends Ui.View {
 
 	function _drawQRCode(dc, code, moduleSize) {
 		var data = code.data;
-		if(!(data instanceof Toybox.Lang.Array)) {
+		if (!(data instanceof Toybox.Lang.Array)) {
 			return;
 		}
 		var nbLines = data.size();
-		if(nbLines == 1) {
+		if (nbLines == 1) {
 			var barcodeHeight = dc.getHeight()/10;
 			nbLines = barcodeHeight / moduleSize;
 		}
 		var offsetY = (dc.getHeight() - (nbLines-1) * 4 * moduleSize) / 2;
 
-		if(Settings.displayLabel) {
+		if (Settings.displayLabel) {
 			System.println("Display label");
 			dc.setColor (Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
+			var font = Gfx.FONT_MEDIUM;
 			dc.drawText(
 				(dc.getWidth()) / 2,
-				offsetY + (nbLines * 4 * moduleSize),
-				Gfx.FONT_MEDIUM,
+				offsetY - dc.getFontHeight(font),
+				font,
 				code.label,
 				Gfx.TEXT_JUSTIFY_CENTER
 			);
@@ -136,5 +156,17 @@ class BarcodeWalletView extends Ui.View {
 		}
 	}
 
+	function displayMessage(dc, message) {
+		System.println("Display message \"" + message + "\".");
+		dc.setColor (Gfx.COLOR_WHITE, Gfx.COLOR_BLACK);
+		dc.clear();
+		dc.drawText(
+			(dc.getWidth()) / 2,
+			(dc.getHeight()) / 2,
+			Gfx.FONT_MEDIUM,
+			message,
+			Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER
+		);
+	}
 
 }
