@@ -26,7 +26,7 @@ class BarcodeWalletDelegate extends Ui.BehaviorDelegate {
 	}
 
 	function onSelect() {
-		if(Settings.codes.size() > 0) {
+		if (Settings.codes.size() > 0) {
 			var codesMenu = [];
 			for(var i=0; i<Settings.codes.size(); i++) {
 				var code = Settings.codes[i];
@@ -50,7 +50,7 @@ class BarcodeWalletDelegate extends Ui.BehaviorDelegate {
 			default:
 				return false;
 		}
-		if(Settings.codes.size() == 0) {
+		if (Settings.codes.size() == 0) {
 			return true;
 		}
 		

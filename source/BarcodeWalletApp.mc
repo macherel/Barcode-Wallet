@@ -1,4 +1,5 @@
 using Toybox.Application;
+using Toybox.WatchUi as Ui;
 
 class BarcodeWalletApp extends Application.AppBase {
 
@@ -28,10 +29,11 @@ class BarcodeWalletApp extends Application.AppBase {
 	function _initializeSettings() {
     	Settings.load();
     	if (Settings.hasToken()) {
-    		Settings.state = :LOADING_CODES;
+    		Settings.state = :LOADING;
     		ClientApi.loadUser(Settings.token);
     	} else {
     		Settings.state = :NO_TOKEN;
     	}
+    	Ui.requestUpdate();
 	}
 }
