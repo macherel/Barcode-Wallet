@@ -42,6 +42,7 @@ class BarcodeWalletView extends Ui.View {
 
     // Update the view
     function onUpdate(dc) {
+	    System.println("> OnUpdate");
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
 
@@ -58,15 +59,17 @@ class BarcodeWalletView extends Ui.View {
 		var size = maxWidth<maxHeight?maxWidth:maxHeight;
 
 		if(_handleErrors(dc)) {
+		    System.println("< OnUpdate - error");
 			return false;
 		}
 
-System.println(Settings.currentIndex);
+		System.println("Getting code #" + Settings.currentIndex + " of " + Settings.codes.size());
 		var code = Settings.codes[Settings.currentIndex];
 		var data = code.data;
 
 		if (data == null) {
 			displayMessage(dc, code.label + "\n" + Ui.loadResource(Rez.Strings.error));
+		    System.println("< OnUpdate - no data");
 			return false;
 		}
 
@@ -90,6 +93,7 @@ System.println(Settings.currentIndex);
 		dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
 		dc.clear();
 		_drawQRCode(dc, code, imageFontSize);
+	    System.println("< OnUpdate");
     }
 
     // Called when this View is removed from the screen. Save the
@@ -113,12 +117,18 @@ System.println(Settings.currentIndex);
 					displayMessage(dc, Ui.loadResource(Rez.Strings.error) + " " + Settings.responseCode);
 					return true;
 				default:
+					System.println("Unknown state");
 					displayMessage(dc, Ui.loadResource(Rez.Strings.errorUnknown));
 					return true;
 			}
 		}
 		if (Settings.codes.size() == 0) {
 			displayMessage(dc, Ui.loadResource(Rez.Strings.errorNoBarcode));
+			return true;
+		}
+		if(Settings.currentIndex < 0 || Settings.currentIndex >= Settings.codes.size()) {
+			System.println("Wrong index");
+			displayMessage(dc, Ui.loadResource(Rez.Strings.errorUnknown));
 			return true;
 		}
 		return false;
