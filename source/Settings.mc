@@ -22,6 +22,7 @@ module Settings {
 	}
 	
 	function setCurrentIndex(index) {
+		System.println("Change currentIndex to "+ Settings.currentIndex);		
 		currentIndex = index;
 		_setProperty("currentIndex", index);
 	}
@@ -47,6 +48,7 @@ module Settings {
 			i++;
 			code = _loadCode(i);
 		}
+		System.println(codes.size() + " codes loaded.");
 		return codes;
 	}
 	
@@ -61,13 +63,16 @@ module Settings {
 			_removeCode(i);
 			i++;
 		}
-		
 		validateCurrentIndex();
 	}
 
 	function validateCurrentIndex() {
 		if (currentIndex > codes.size()-1) {
 			setCurrentIndex(codes.size()-1);
+		} else if(currentIndex < 0) {
+			setCurrentIndex(0);
+		} else {
+			System.println("Settings.currentIndex = "+ Settings.currentIndex);
 		}
 	}
 
