@@ -52,9 +52,16 @@ module Settings {
 	
 	function storeCodes(newCodes) {
 		codes = newCodes;
-		for(var i=0; i<codes.size(); i++) {
+		var i = 0;
+		while(i<codes.size()) {
 			_storeCode(codes[i]);
+			i++;
 		}
+		while(_loadCode(i) != null) {
+			_removeCode(i);
+			i++;
+		}
+		
 		validateCurrentIndex();
 	}
 
@@ -97,6 +104,15 @@ module Settings {
 			}
 		}
 		return null;
+	}
+
+	function _removeCode(id) {
+		if (App has :Storage) {
+			App.Storage.deleteValue("code#" + id);
+		} else {
+			var app = App.getApp();
+			app.setProperty("code#" + id + "-data", null);
+		}
 	}
 
 	function _setProperty(key, value) {
