@@ -7,7 +7,11 @@ class Code {
 
 	function initialize(id, label, data) {
 		self.id = id;
-		self.label = label;
+		if(label == null) {
+			self.label = "";
+		} else {
+			self.label = label;
+		}
 		self.data = data;
 	}
 

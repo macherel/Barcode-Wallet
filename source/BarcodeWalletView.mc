@@ -57,32 +57,11 @@ class BarcodeWalletView extends Ui.View {
 
 		var size = maxWidth<maxHeight?maxWidth:maxHeight;
 
-		////////////////////////////////////////////////////////////////
-		// Handle error
-		////////////////////////////////////////////////////////////////
-		if (Settings.codes == null || Settings.debug) {
-			switch(Settings.state) {
-				case :READY:
-					break;
-				case :LOADING:
-					displayMessage(dc, Ui.loadResource(Rez.Strings.loading));
-					return false;
-				case :NO_TOKEN:
-					displayMessage(dc, Ui.loadResource(Rez.Strings.errorNoToken));
-					return false;
-				case :ERROR:
-					displayMessage(dc, Ui.loadResource(Rez.Strings.error) + " " + Settings.responseCode);
-					return false;
-				default:
-					displayMessage(dc, Ui.loadResource(Rez.Strings.errorUnknown));
-					return false;
-			}
-		}
-		if (Settings.codes.size() == 0) {
-			displayMessage(dc, Ui.loadResource(Rez.Strings.errorNoBarcode));
+		if(_handleErrors(dc)) {
 			return false;
 		}
 
+System.println(Settings.currentIndex);
 		var code = Settings.codes[Settings.currentIndex];
 		var data = code.data;
 
@@ -118,6 +97,32 @@ class BarcodeWalletView extends Ui.View {
     // memory.
     function onHide() {
     }
+
+	function _handleErrors(dc) {
+		if (Settings.codes == null || Settings.debug || Settings.state == :NO_TOKEN) {
+			switch(Settings.state) {
+				case :READY:
+					break;
+				case :LOADING:
+					displayMessage(dc, Ui.loadResource(Rez.Strings.loading));
+					return true;
+				case :NO_TOKEN:
+					displayMessage(dc, Ui.loadResource(Rez.Strings.errorNoToken));
+					return true;
+				case :ERROR:
+					displayMessage(dc, Ui.loadResource(Rez.Strings.error) + " " + Settings.responseCode);
+					return true;
+				default:
+					displayMessage(dc, Ui.loadResource(Rez.Strings.errorUnknown));
+					return true;
+			}
+		}
+		if (Settings.codes.size() == 0) {
+			displayMessage(dc, Ui.loadResource(Rez.Strings.errorNoBarcode));
+			return true;
+		}
+		return false;
+	}
 
 	function _drawQRCode(dc, code, moduleSize) {
 		var data = code.data;
