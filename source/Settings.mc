@@ -26,9 +26,16 @@ module Settings {
 	function setCurrentIndex(index) {
 		System.println("Change currentIndex to "+ Settings.currentIndex);		
 		currentIndex = index;
-		currentCode = codes[currentIndex];
+		currentCode = _getCurrentCode();
 		App.getApp().setProperty("currentIndex", index);
 		state = :READY;
+	}
+	
+	function _getCurrentCode() {
+		if(0 <= currentIndex && currentIndex < codes.size()) {
+			return codes[currentIndex];
+		}
+		return null;
 	}
 
 	function load() {
@@ -42,7 +49,7 @@ module Settings {
 			currentIndex = 0;
 		}
 		validateCurrentIndex();
-		currentCode = codes[currentIndex];
+		currentCode = _getCurrentCode();
 	}
 
 	function _loadCodes() {
@@ -75,7 +82,8 @@ module Settings {
 	function validateCurrentIndex() {
 		if (currentIndex > codes.size()-1) {
 			setCurrentIndex(codes.size()-1);
-		} else if(currentIndex < 0) {
+		}
+		if(currentIndex < 0) {
 			setCurrentIndex(0);
 		} else {
 			System.println("Settings.currentIndex = "+ Settings.currentIndex);
