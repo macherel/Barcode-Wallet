@@ -2,6 +2,7 @@ using Toybox.Communications as Comm;
 using Toybox.WatchUi as Ui;
 using Toybox.Lang as Lang;
 using Toybox.System as System;
+using Toybox.Attention as Attention;
 
 module ClientApi {
 	function _onUserLoaded(responseCode, data) {
@@ -14,6 +15,7 @@ module ClientApi {
 				System.println("code #" + i + " \"" + responseCodes[i]["name"] + "\" received.");
 			}
 			Settings.storeCodes(codes);
+			_vibrate();
 			Settings.state = :READY;
 		} else {
 			Settings.state = :ERROR;
@@ -24,9 +26,16 @@ module ClientApi {
 		Ui.requestUpdate();
 	}
 	
-	function loadUser(token) {
+	function loadUser(token, latlng) {
 		var strUrl = "https://data-manager-api.qrcode.macherel.fr/users/" + Settings.token;
-		System.println(">>> loadUser - " + Settings.token);
+		if(latlng != null) {
+			strUrl += "?lat=" + latlng[:lat];
+			strUrl += "&lng=" + latlng[:lng];
+		}
+		System.println(">>> loadUser - " + strUrl);
+		if(Settings.state != :READY) {
+			Settings.state = :LOADING;
+		}
 		Comm.makeWebRequest(
 			strUrl,
 			null,
@@ -39,5 +48,11 @@ module ClientApi {
 			},
 			new Lang.Method(ClientApi, :_onUserLoaded)
 		);
+	}
+	
+	function _vibrate() {
+		if (Attention has :vibrate) {
+			Attention.vibrate([new Attention.VibeProfile(50, 1000)]);
+		}
 	}
 }

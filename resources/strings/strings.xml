@@ -3,13 +3,15 @@
 	<string id="mainMenuTitle">Select barcode</string>
 
 	<string id="loading">Loading...</string>
+	<string id="waitingPosition">Waiting for&#xA;position...</string>
 	<string id="error">Error</string>
 	<string id="errorNoBarcode">No barcode</string>
 	<string id="errorNoToken">Please&#xA;contact&#xA;developer</string>
 	<string id="errorUnknown">Unknown error</string>
 
 	<string id="token">Token</string>
-	<string id="displayLabel">Display label</string> 
-	<string id="debug">Debug</string> 
+	<string id="displayLabel">Display label</string>
+	<string id="usePosition">Sort codes by distance</string>
+	<string id="debug">Debug</string>
 
 </strings>

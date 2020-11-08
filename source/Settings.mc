@@ -9,7 +9,9 @@ module Settings {
 	var token;
 	var displayLabel;
 	var codes = null;
+	var usePosition = false;
 	var currentIndex = null;
+	var currentCode = null;
 	var state = :UNKNOWN; // UNKNOWN, READY, ERROR, LOADING, NO_TOKEN
 	var responseCode = null;
 
@@ -24,12 +26,15 @@ module Settings {
 	function setCurrentIndex(index) {
 		System.println("Change currentIndex to "+ Settings.currentIndex);		
 		currentIndex = index;
+		currentCode = codes[currentIndex];
 		App.getApp().setProperty("currentIndex", index);
+		state = :READY;
 	}
 
 	function load() {
 		codes = _loadCodes();
 		token = _getProperty("token");
+		usePosition = _getProperty("usePosition");
 		debug = _getProperty("debug");
 		displayLabel = _getProperty("displayLabel");
 		currentIndex = App.getApp().getProperty("currentIndex");
@@ -37,6 +42,7 @@ module Settings {
 			currentIndex = 0;
 		}
 		validateCurrentIndex();
+		currentCode = codes[currentIndex];
 	}
 
 	function _loadCodes() {
