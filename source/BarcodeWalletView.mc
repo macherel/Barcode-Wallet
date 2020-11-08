@@ -11,7 +11,7 @@ class BarcodeWalletView extends Ui.View {
 
     // Load your resources here
     function onLayout(dc) {
-		System.println("Loading resources...");	
+		System.println("> onLayout");	
 
 		qrCodeFont = [
 			Ui.loadResource(Rez.Fonts.qrcode1),
@@ -31,7 +31,7 @@ class BarcodeWalletView extends Ui.View {
 			Ui.loadResource(Rez.Fonts.qrcode15),
 			Ui.loadResource(Rez.Fonts.qrcode16)
 		];
-		System.println("resources loaded.");
+		System.println("< onLayout");
     }
 
     // Called when this View is brought to the foreground. Restore

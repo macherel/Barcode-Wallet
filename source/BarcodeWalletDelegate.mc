@@ -8,7 +8,7 @@ class BarcodeWalletDelegate extends Ui.BehaviorDelegate {
 	}
 
 	function onNextPage() {
-		if (Settings.codes.size == 0) {
+		if (Settings.codes.size() == 0) {
 			return false;
 		}
 		Settings.setCurrentIndex((Settings.currentIndex + 1) % Settings.codes.size());
@@ -17,7 +17,7 @@ class BarcodeWalletDelegate extends Ui.BehaviorDelegate {
 	}
 
 	function onPreviousPage() {
-		if (Settings.codes.size == 0) {
+		if (Settings.codes.size() == 0) {
 			return false;
 		}
 		Settings.setCurrentIndex((Settings.currentIndex - 1 + Settings.codes.size()) % Settings.codes.size());

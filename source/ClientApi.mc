@@ -20,12 +20,13 @@ module ClientApi {
 			System.println("Error while loading user (" + responseCode + ")");
 			// nothing to do, data will be loaded next time
 		}
+		System.println("<<< loadUser");
 		Ui.requestUpdate();
 	}
 	
 	function loadUser(token) {
 		var strUrl = "https://data-manager-api.qrcode.macherel.fr/users/" + Settings.token;
-		System.println("Loading user from " + strUrl);
+		System.println(">>> loadUser - " + Settings.token);
 		Comm.makeWebRequest(
 			strUrl,
 			null,

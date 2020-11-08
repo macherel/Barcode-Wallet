@@ -24,7 +24,7 @@ module Settings {
 	function setCurrentIndex(index) {
 		System.println("Change currentIndex to "+ Settings.currentIndex);		
 		currentIndex = index;
-		_setProperty("currentIndex", index);
+		App.getApp().setProperty("currentIndex", index);
 	}
 
 	function load() {
@@ -32,7 +32,7 @@ module Settings {
 		token = _getProperty("token");
 		debug = _getProperty("debug");
 		displayLabel = _getProperty("displayLabel");
-		currentIndex = _getProperty("currentIndex");
+		currentIndex = App.getApp().getProperty("currentIndex");
 		if (currentIndex == null) {
 			currentIndex = 0;
 		}
@@ -131,7 +131,7 @@ module Settings {
 
 	function _getProperty(key) {
 		if (App has :Properties) {
-			return Properties.getValue(key);
+			return App.Properties.getValue(key);
 		} else {
 			var app = App.getApp();
 			return app.getProperty(key);
