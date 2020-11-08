@@ -1,9 +1,13 @@
 <settings>
-	<setting propertyKey="@Properties.token" title="@Strings.token"> 
+	<setting propertyKey="@Properties.token" title="@Strings.token">
 		<settingConfig type="alphaNumeric" />
 	</setting>
 
 	<setting propertyKey="@Properties.displayLabel" title="@Strings.displayLabel">
+		<settingConfig type="boolean" />
+	</setting>
+
+	<setting propertyKey="@Properties.usePosition" title="@Strings.usePosition">
 		<settingConfig type="boolean" />
 	</setting>
 

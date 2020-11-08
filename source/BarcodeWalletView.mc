@@ -64,7 +64,7 @@ class BarcodeWalletView extends Ui.View {
 		}
 
 		System.println("Getting code #" + Settings.currentIndex + " of " + Settings.codes.size());
-		var code = Settings.codes[Settings.currentIndex];
+		var code = Settings.currentCode;
 		var data = code.data;
 
 		if (data == null) {
@@ -94,6 +94,7 @@ class BarcodeWalletView extends Ui.View {
 		dc.clear();
 		_drawQRCode(dc, code, imageFontSize);
 	    System.println("< OnUpdate");
+	    return true;
     }
 
     // Called when this View is removed from the screen. Save the
@@ -107,6 +108,9 @@ class BarcodeWalletView extends Ui.View {
 			switch(Settings.state) {
 				case :READY:
 					break;
+				case :WAITING_POSITION:
+					displayMessage(dc, Ui.loadResource(Rez.Strings.waitingPosition));
+					return true;
 				case :LOADING:
 					displayMessage(dc, Ui.loadResource(Rez.Strings.loading));
 					return true;
