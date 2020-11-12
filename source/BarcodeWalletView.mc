@@ -65,7 +65,10 @@ class BarcodeWalletView extends Ui.View {
 
 		System.println("Getting code #" + Settings.currentIndex + " of " + Settings.codes.size());
 		var code = Settings.currentCode;
-		var data = code == null ? null : code.data;
+		if (code == null) {
+			code = new Code(-1, null, null);
+		}
+		var data = code.data;
 
 		if (data == null) {
 			displayMessage(dc, code.label + "\n" + Ui.loadResource(Rez.Strings.error));
