@@ -11,6 +11,10 @@
 		<settingConfig type="boolean" />
 	</setting>
 
+	<setting propertyKey="@Properties.vibrate" title="@Strings.vibrate">
+		<settingConfig type="boolean" />
+	</setting>
+
 	<setting propertyKey="@Properties.debug" title="@Strings.debug">
 		<settingConfig type="boolean" />
 	</setting>

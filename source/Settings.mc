@@ -10,6 +10,7 @@ module Settings {
 	var displayLabel;
 	var codes = null;
 	var usePosition = false;
+	var vibrate = true;
 	var currentIndex = null;
 	var currentCode = null;
 	var state = :UNKNOWN; // UNKNOWN, READY, ERROR, LOADING, NO_TOKEN
@@ -42,6 +43,7 @@ module Settings {
 		codes = _loadCodes();
 		token = _getProperty("token");
 		usePosition = _getProperty("usePosition");
+		vibrate = _getProperty("vibrate");
 		debug = _getProperty("debug");
 		displayLabel = _getProperty("displayLabel");
 		currentIndex = App.getApp().getProperty("currentIndex");

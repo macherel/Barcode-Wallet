@@ -51,7 +51,7 @@ module ClientApi {
 	}
 	
 	function _vibrate() {
-		if (Attention has :vibrate) {
+		if (Settings.vibrate && Attention has :vibrate) {
 			Attention.vibrate([new Attention.VibeProfile(50, 1000)]);
 		}
 	}
