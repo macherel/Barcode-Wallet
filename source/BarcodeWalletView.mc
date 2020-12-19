@@ -88,6 +88,9 @@ class BarcodeWalletView extends Ui.View {
 		    imageFontSize++
 		) {
 		}
+		if(Settings.zoom) {
+			imageFontSize++;
+		}
 		System.println("Code will be displayed using font size " + imageFontSize);
 
 		////////////////////////////////////////////////////////////////
