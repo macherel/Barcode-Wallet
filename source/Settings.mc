@@ -15,6 +15,7 @@ module Settings {
 	var currentCode = null;
 	var state = :UNKNOWN; // UNKNOWN, READY, ERROR, LOADING, NO_TOKEN
 	var responseCode = null;
+	var zoom = false;
 
 	function getToken() {
 		return _getProperty("token");

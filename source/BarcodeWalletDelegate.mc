@@ -41,7 +41,10 @@ class BarcodeWalletDelegate extends Ui.BehaviorDelegate {
 		}
 		return true;
 	}
-	function onMenu() {	return onSelect(); }
+	function onMenu() {	
+		Settings.zoom = !Settings.zoom;
+		Ui.requestUpdate();
+	}
 	
 	function onSwipe(swipeEvent) {
 		switch(swipeEvent.getDirection()) {
