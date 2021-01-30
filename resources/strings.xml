@@ -11,6 +11,7 @@
 
 	<string id="token">Token</string>
 	<string id="displayLabel">Display label</string>
+	<string id="displayValue">Display value</string>
 	<string id="usePosition">Sort codes by distance</string>
 	<string id="vibrate">Vibrate</string>
 	<string id="debug">Debug</string>

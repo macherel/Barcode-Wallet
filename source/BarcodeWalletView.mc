@@ -159,17 +159,17 @@ class BarcodeWalletView extends Ui.View {
 		if (Settings.displayLabel) {
 			System.println("Display label");
 			dc.setColor (Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
-			var font = Gfx.FONT_MEDIUM;
 			dc.drawText(
 				(dc.getWidth()) / 2,
-				offsetY - dc.getFontHeight(font),
-				font,
+				offsetY - dc.getFontHeight(Gfx.FONT_MEDIUM),
+				Gfx.FONT_MEDIUM,
 				code.label,
 				Gfx.TEXT_JUSTIFY_CENTER
 			);
 		}
 
 		dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
+		var tmp = "";
 		for(var i=0; i<nbLines; i++) {
 			dc.drawText(
 					(dc.getWidth()) / 2,
@@ -177,6 +177,19 @@ class BarcodeWalletView extends Ui.View {
 					qrCodeFont[moduleSize-1],
 					data.size() == 1 ? data[0] : data[i], // For barcode, repeat the first raw
 					Gfx.TEXT_JUSTIFY_CENTER
+			);
+		}
+
+		if (Settings.displayValue) {
+			System.println("Display label");
+			dc.setColor (Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
+			var font = Gfx.FONT_MEDIUM;
+			dc.drawText(
+				(dc.getWidth()) / 2,
+				offsetY + (nbLines * 4 * moduleSize),
+				Gfx.FONT_MEDIUM,
+				code.data,
+				Gfx.TEXT_JUSTIFY_CENTER
 			);
 		}
 	}

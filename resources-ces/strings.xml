@@ -11,6 +11,7 @@
 
 	<string id="token">Token</string>
 	<string id="displayLabel">Zobrazit popis</string>
+	<string id="displayValue">Display hodnotu</string>
 	<string id="usePosition">Seøadit kódy podle délky</string>
 	<string id="vibrate">Vibrovat</string>
 	<string id="debug">Ladit</string>
