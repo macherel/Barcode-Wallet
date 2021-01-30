@@ -2,6 +2,7 @@
 	<property id="token" type="string"></property>
 	<property id="displayLabel" type="boolean">true</property>
 	<property id="displayValue" type="boolean">false</property>
+	<property id="forceBacklight" type="boolean">false</property>
 	<property id="usePosition" type="boolean">false</property>
 	<property id="vibrate" type="boolean">true</property>
 	<property id="debug" type="boolean">false</property>

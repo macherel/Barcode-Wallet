@@ -12,6 +12,7 @@
 	<string id="token">Jeton</string>
 	<string id="displayLabel">Afficher les noms</string>
 	<string id="displayValue">Display les valeurs</string>
+	<string id="forceBacklight">Forcer le rétroéclairage</string>
 	<string id="usePosition">Trier par distance</string>
 	<string id="vibrate">Vibrer</string>
 	<string id="debug">Debug</string>

@@ -99,6 +99,10 @@ class BarcodeWalletView extends Ui.View {
 		dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
 		dc.clear();
 		_drawQRCode(dc, code, imageFontSize);
+
+    	if(Settings.forceBacklight) {
+			Attention.backlight(1.0);
+    	}
 	    System.println("< OnUpdate");
 	    return true;
     }
