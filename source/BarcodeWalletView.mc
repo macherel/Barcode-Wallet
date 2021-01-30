@@ -66,7 +66,7 @@ class BarcodeWalletView extends Ui.View {
 		System.println("Getting code #" + Settings.currentIndex + " of " + Settings.codes.size());
 		var code = Settings.currentCode;
 		if (code == null) {
-			code = new Code(-1, null, null);
+			code = new Code(-1, null, null, null);
 		}
 		var data = code.data;
 
@@ -190,9 +190,9 @@ class BarcodeWalletView extends Ui.View {
 			var font = Gfx.FONT_MEDIUM;
 			dc.drawText(
 				(dc.getWidth()) / 2,
-				offsetY + (nbLines * 4 * moduleSize),
+				offsetY + ((data.size() == 1 ? nbLines * 4 : data[0].length()) * moduleSize),
 				Gfx.FONT_MEDIUM,
-				code.data,
+				code.value,
 				Gfx.TEXT_JUSTIFY_CENTER
 			);
 		}
