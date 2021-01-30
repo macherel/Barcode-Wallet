@@ -8,6 +8,8 @@ module Settings {
 	var debug = false;
 	var token;
 	var displayLabel;
+	var displayValue;
+	var forceBacklight;
 	var codes = null;
 	var usePosition = false;
 	var vibrate = true;
@@ -47,6 +49,8 @@ module Settings {
 		vibrate = _getProperty("vibrate");
 		debug = _getProperty("debug");
 		displayLabel = _getProperty("displayLabel");
+		displayValue = _getProperty("displayValue");
+		forceBacklight = _getProperty("forceBacklight");
 		currentIndex = App.getApp().getProperty("currentIndex");
 		if (currentIndex == null) {
 			currentIndex = 0;
@@ -104,8 +108,8 @@ module Settings {
 			);
 		} else {
 			var app = App.getApp();
-			app.setProperty("code#" + id + "-label", code.label);
-			app.setProperty("code#" + id + "-data", code.data);
+			app.setProperty("code#" + code.id + "-label", code.label);
+			app.setProperty("code#" + code.id + "-data", code.data);
 		}
 	}
 

@@ -1,0 +1,20 @@
+<strings>
+    <string id="AppName">Barcode Wallet</string>
+	<string id="mainMenuTitle">Selectionner un code</string>
+
+	<string id="loading">Chargement...</string>
+	<string id="waitingPosition">Attente de&#xA;la position...</string>
+	<string id="error">Erreur</string>
+	<string id="errorNoBarcode">Pas de code&#xA;disponible</string>
+	<string id="errorNoToken">Merci de&#xA;contacter&#xA;le développeur</string>
+	<string id="errorUnknown">Erreur inconnue</string>
+
+	<string id="token">Jeton</string>
+	<string id="displayLabel">Afficher les noms</string>
+	<string id="displayValue">Display les valeurs</string>
+	<string id="forceBacklight">Forcer le rétroéclairage</string>
+	<string id="usePosition">Trier par distance</string>
+	<string id="vibrate">Vibrer</string>
+	<string id="debug">Debug</string>
+
+</strings>
