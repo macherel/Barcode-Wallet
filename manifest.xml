@@ -84,8 +84,10 @@
             <iq:uses-permission id="Positioning"/>
         </iq:permissions>
         <iq:languages>
+            <iq:language>ces</iq:language>
             <iq:language>eng</iq:language>
             <iq:language>fre</iq:language>
+            <iq:language>hun</iq:language>
         </iq:languages>
         <iq:barrels/>
     </iq:application>

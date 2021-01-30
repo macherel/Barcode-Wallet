@@ -1,0 +1,20 @@
+<strings>
+    <string id="AppName">Barcode Wallet</string>
+	<string id="mainMenuTitle">Válassz vonalkódot</string>
+
+	<string id="loading">Betöltés...</string>
+	<string id="waitingPosition">Várakozás a&#xA;pozícióra...</string>
+	<string id="error">Hiba</string>
+	<string id="errorNoBarcode">Nincs vonalkód</string>
+	<string id="errorNoToken">Kérlek&#xA;fordulj a&#xA;fejlesztőhöz</string>
+	<string id="errorUnknown">Ismeretlen hiba</string>
+
+	<string id="token">Token</string>
+	<string id="displayLabel">Cimke megjelenítése</string>
+	<string id="displayValue">Érték megjelenítése</string>
+	<string id="forceBacklight">Force backlight</string>
+	<string id="usePosition">Vonalkódok távolság szerint rendezve</string>
+	<string id="vibrate">rezgés</string>
+	<string id="debug">Hibakeresés</string>
+
+</strings>
