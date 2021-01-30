@@ -3,15 +3,17 @@ using Toybox.Application as App;
 class Code {
 	var id;
 	var label;
+	var value;
 	var data;
 
-	function initialize(id, label, data) {
+	function initialize(id, label, value, data) {
 		self.id = id;
 		if(label == null) {
 			self.label = "";
 		} else {
 			self.label = label;
 		}
+		self.value = value;
 		self.data = data;
 	}
 
@@ -19,6 +21,7 @@ class Code {
 		return new Code(
 			id,
 			data["name"],
+			data["value"],
 			data["encodedData"]
 		);
 	}
@@ -27,6 +30,7 @@ class Code {
 		return "Code("
 			+ "id=" + self.id
 			+ ", label=" + self.label
+			+ ", value=" + self.value
 			+ ", data=" + self.data
 			+ ")";
 	}

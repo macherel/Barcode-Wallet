@@ -103,12 +103,14 @@ module Settings {
 				"code#" + code.id,
 				{
 					"label" => code.label,
+					"value" => code.value,
 					"data" => code.data,
 				}
 			);
 		} else {
 			var app = App.getApp();
 			app.setProperty("code#" + code.id + "-label", code.label);
+			app.setProperty("code#" + code.id + "-value", code.value);
 			app.setProperty("code#" + code.id + "-data", code.data);
 		}
 	}
@@ -119,14 +121,15 @@ module Settings {
 		if (App has :Storage) {
 			var code = App.Storage.getValue("code#" + id);
 			if (code != null) {
-				return new Code(id, code["label"], code["data"]);
+				return new Code(id, code["label"], code["value"], code["data"]);
 			}
 		} else {
 			var app = App.getApp();
 			var label= app.getProperty("code#" + id + "-label");
+			var value= app.getProperty("code#" + id + "-value");
 			var data = app.getProperty("code#" + id + "-data");
 			if (data != null) {
-				return new Code(id, label, data);
+				return new Code(id, label, value, data);
 			}
 		}
 		return null;
