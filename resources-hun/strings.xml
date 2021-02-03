@@ -12,7 +12,7 @@
 	<string id="token">Token</string>
 	<string id="displayLabel">Cimke megjelenítése</string>
 	<string id="displayValue">Érték megjelenítése</string>
-	<string id="forceBacklight">Force backlight</string>
+	<string id="size">Maximum limit (-1 to disable)</string>
 	<string id="usePosition">Vonalkódok távolság szerint rendezve</string>
 	<string id="vibrate">rezgés</string>
 	<string id="debug">Hibakeresés</string>

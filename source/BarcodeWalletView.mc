@@ -5,12 +5,12 @@ class BarcodeWalletView extends Ui.View {
 
 	var qrCodeFont = [];
 
-    function initialize() {
-        View.initialize();
-    }
+	function initialize() {
+		View.initialize();
+	}
 
-    // Load your resources here
-    function onLayout(dc) {
+	// Load your resources here
+	function onLayout(dc) {
 		System.println("> onLayout");	
 
 		qrCodeFont = [
@@ -32,19 +32,19 @@ class BarcodeWalletView extends Ui.View {
 			Ui.loadResource(Rez.Fonts.qrcode16)
 		];
 		System.println("< onLayout");
-    }
+	}
 
-    // Called when this View is brought to the foreground. Restore
-    // the state of this View and prepare it to be shown. This includes
-    // loading resources into memory.
-    function onShow() {
-    }
+	// Called when this View is brought to the foreground. Restore
+	// the state of this View and prepare it to be shown. This includes
+	// loading resources into memory.
+	function onShow() {
+	}
 
-    // Update the view
-    function onUpdate(dc) {
-	    System.println("> OnUpdate");
-        // Call the parent onUpdate function to redraw the layout
-        View.onUpdate(dc);
+	// Update the view
+	function onUpdate(dc) {
+		System.println("> OnUpdate");
+		// Call the parent onUpdate function to redraw the layout
+		View.onUpdate(dc);
 
 		var dcWidth = dc.getWidth();
 		var dcHeight = dc.getHeight();
@@ -59,7 +59,7 @@ class BarcodeWalletView extends Ui.View {
 		var size = maxWidth<maxHeight?maxWidth:maxHeight;
 
 		if(_handleErrors(dc)) {
-		    System.println("< OnUpdate - error");
+			System.println("< OnUpdate - error");
 			return false;
 		}
 
@@ -72,7 +72,7 @@ class BarcodeWalletView extends Ui.View {
 
 		if (data == null) {
 			displayMessage(dc, code.label + "\n" + Ui.loadResource(Rez.Strings.error));
-		    System.println("< OnUpdate - no data");
+			System.println("< OnUpdate - no data");
 			return false;
 		}
 
@@ -83,9 +83,9 @@ class BarcodeWalletView extends Ui.View {
 		// On round watch barcode can be bigger
 		var factor = (maxHeight==maxWidth && data.size()==1) ? 0.8 : 1;			
 		for(imageFontSize = 1;
-		    imageFontSize < qrCodeFont.size() &&
-		    (imageFontSize+1) * data[0].length() <= size/factor+0.001;
-		    imageFontSize++
+			imageFontSize < qrCodeFont.size() &&
+			(imageFontSize+1) * data[0].length() <= size/factor+0.001;
+			imageFontSize++
 		) {
 		}
 		if(Settings.zoom) {
@@ -99,19 +99,15 @@ class BarcodeWalletView extends Ui.View {
 		dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
 		dc.clear();
 		_drawQRCode(dc, code, imageFontSize);
+		System.println("< OnUpdate");
+		return true;
+	}
 
-    	if(Settings.forceBacklight) {
-			Attention.backlight(1.0);
-    	}
-	    System.println("< OnUpdate");
-	    return true;
-    }
-
-    // Called when this View is removed from the screen. Save the
-    // state of this View here. This includes freeing resources from
-    // memory.
-    function onHide() {
-    }
+	// Called when this View is removed from the screen. Save the
+	// state of this View here. This includes freeing resources from
+	// memory.
+	function onHide() {
+	}
 
 	function _handleErrors(dc) {
 		if (Settings.codes == null || Settings.debug || Settings.state == :NO_TOKEN) {
@@ -191,7 +187,7 @@ class BarcodeWalletView extends Ui.View {
 			dc.drawText(
 				(dc.getWidth()) / 2,
 				offsetY + ((data.size() == 1 ? nbLines * 4 : data[0].length()) * moduleSize),
-				Gfx.FONT_MEDIUM,
+				Gfx.FONT_XTINY,
 				code.value,
 				Gfx.TEXT_JUSTIFY_CENTER
 			);

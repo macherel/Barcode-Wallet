@@ -28,9 +28,15 @@ module ClientApi {
 	
 	function loadUser(token, latlng) {
 		var strUrl = "https://data-manager-api.qrcode.macherel.fr/users/" + Settings.token;
+		var hasQueryParam = false;
 		if(latlng != null) {
 			strUrl += "?lat=" + latlng[:lat];
 			strUrl += "&lng=" + latlng[:lng];
+			hasQueryParam = true;
+		}
+		if(Settings.size > 0) {
+			strUrl += (hasQueryParam?"&":"?") + "size=" + size;
+			hasQueryParam = true;
 		}
 		System.println(">>> loadUser - " + strUrl);
 		if(Settings.state != :READY) {

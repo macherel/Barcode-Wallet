@@ -9,8 +9,8 @@ module Settings {
 	var token;
 	var displayLabel;
 	var displayValue;
-	var forceBacklight;
 	var codes = null;
+	var size = -1;
 	var usePosition = false;
 	var vibrate = true;
 	var currentIndex = null;
@@ -43,6 +43,7 @@ module Settings {
 	}
 
 	function load() {
+		size = _getProperty("size");
 		codes = _loadCodes();
 		token = _getProperty("token");
 		usePosition = _getProperty("usePosition");
@@ -50,7 +51,6 @@ module Settings {
 		debug = _getProperty("debug");
 		displayLabel = _getProperty("displayLabel");
 		displayValue = _getProperty("displayValue");
-		forceBacklight = _getProperty("forceBacklight");
 		currentIndex = App.getApp().getProperty("currentIndex");
 		if (currentIndex == null) {
 			currentIndex = 0;
@@ -63,7 +63,7 @@ module Settings {
 		codes = [];
 		var i = 0;
 		var code = _loadCode(i);
-		while (code != null) {
+		while (code != null && i < size) {
 			codes.add(code);
 			i++;
 			code = _loadCode(i);
