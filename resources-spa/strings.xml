@@ -1,0 +1,20 @@
+<strings>
+    <string id="AppName">Barcode Wallet</string>
+	<string id="mainMenuTitle">Elegir barcode</string>
+
+	<string id="loading">Cargando...</string>
+	<string id="waitingPosition">Esperando&#xA;posición...</string>
+	<string id="error">Error</string>
+	<string id="errorNoBarcode">Sin barcodes</string>
+	<string id="errorNoToken">Contacte&#xA;con el desarrollador</string>
+	<string id="errorUnknown">Error desconocido</string>
+
+	<string id="token">Token</string>
+	<string id="displayLabel">Mostrar etiqueta</string>
+	<string id="displayValue">Mostrar valor</string>
+	<string id="size">Maximum limit (-1 to disable)</string>
+	<string id="usePosition">Ordenar códigos por distancia</string>
+	<string id="vibrate">Vibración</string>
+	<string id="debug">Debug</string>
+
+</strings>
