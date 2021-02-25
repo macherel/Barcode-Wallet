@@ -10,7 +10,7 @@ class DMenuItem
 {
 	const LABEL_FONT = Gfx.FONT_SMALL;
 	const SELECTED_LABEL_FONT = Gfx.FONT_LARGE;
-	const VALUE_FONT = Gfx.FONT_MEDIUM;
+	const VALUE_FONT = Gfx.FONT_XTINY;
 	const PAD = 0;
 
 	var	id, label, value, userData;
@@ -87,6 +87,7 @@ class DMenuItem
 			h = labDims[1] + valDims[1] + PAD;
 			yL = y + (h3 - h) / 2;
 			yV = yL + labDims[1] + PAD;
+
 			dc.drawText (width / 2, yV, VALUE_FONT, val, Gfx.TEXT_JUSTIFY_CENTER);
 		}
 		else
