@@ -63,7 +63,7 @@ module Settings {
 		codes = [];
 		var i = 0;
 		var code = _loadCode(i);
-		while (code != null && i < size) {
+		while (code != null && (size <= 0 || i < size)) {
 			codes.add(code);
 			i++;
 			code = _loadCode(i);
