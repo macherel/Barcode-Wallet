@@ -30,7 +30,7 @@ class BarcodeWalletDelegate extends Ui.BehaviorDelegate {
 			var codesMenu = [];
 			for(var i=0; i<Settings.codes.size(); i++) {
 				var code = Settings.codes[i];
-				codesMenu.add(new DMenuItem(i, code.label, null, code));
+				codesMenu.add(new DMenuItem(i, code.label, code.value, code));
 			}
 			var view = new DMenu(codesMenu, Ui.loadResource(Rez.Strings.mainMenuTitle));
 			view.updateIndex(Settings.currentIndex);
