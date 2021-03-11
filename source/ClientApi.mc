@@ -35,7 +35,7 @@ module ClientApi {
 			hasQueryParam = true;
 		}
 		if(Settings.size > 0) {
-			strUrl += (hasQueryParam?"&":"?") + "size=" + size;
+			strUrl += (hasQueryParam?"&":"?") + "size=" + Settings.size;
 			hasQueryParam = true;
 		}
 		System.println(">>> loadUser - " + strUrl);
