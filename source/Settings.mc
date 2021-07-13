@@ -116,8 +116,6 @@ module Settings {
 	}
 
 	function _loadCode(id) {
-		var label = null;
-		var data = null;
 		if (App has :Storage) {
 			var code = App.Storage.getValue("code#" + id);
 			if (code != null) {
