@@ -1,0 +1,20 @@
+<strings>
+    <string id="AppName">条码钱包</string>
+	<string id="mainMenuTitle">选择条码</string>
+
+	<string id="loading">正在加载...</string>
+	<string id="waitingPosition">获取&#xA;位置中...</string>
+	<string id="error">错误</string>
+	<string id="errorNoBarcode">没有条码</string>
+	<string id="errorNoToken">请阅读&#xA;应用商店说明&#xA;创建条码</string>
+	<string id="errorUnknown">位置错误</string>
+
+	<string id="token">令牌</string>
+	<string id="displayLabel">显示名称</string>
+	<string id="displayValue">显示数据</string>
+	<string id="size">显示条码数量 (-1 不限制)</string>
+	<string id="usePosition">依据距离对条码排序</string>
+	<string id="vibrate">震动</string>
+	<string id="debug">调试模式</string>
+
+</strings>
