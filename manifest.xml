@@ -89,6 +89,7 @@
             <iq:language>fre</iq:language>
             <iq:language>hun</iq:language>
             <iq:language>spa</iq:language>
+            <iq:language>zhs</iq:language>
         </iq:languages>
         <iq:barrels/>
     </iq:application>
