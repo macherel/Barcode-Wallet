@@ -104,13 +104,17 @@ module Settings {
 				{
 					"label" => code.label,
 					"value" => code.value,
-					"data" => code.data,
+					"width" => code.width,
+					"height"=> code.height,
+					"data"  => code.data,
 				}
 			);
 		} else {
 			var app = App.getApp();
 			app.setProperty("code#" + code.id + "-label", code.label);
 			app.setProperty("code#" + code.id + "-value", code.value);
+			app.setProperty("code#" + code.id + "-width", code.width);
+			app.setProperty("code#" + code.id + "-height", code.height);
 			app.setProperty("code#" + code.id + "-data", code.data);
 		}
 	}
@@ -119,15 +123,17 @@ module Settings {
 		if (App has :Storage) {
 			var code = App.Storage.getValue("code#" + id);
 			if (code != null) {
-				return new Code(id, code["label"], code["value"], code["data"]);
+				return new Code(id, code["label"], code["value"], code["width"], code["height"], code["data"]);
 			}
 		} else {
 			var app = App.getApp();
-			var label= app.getProperty("code#" + id + "-label");
-			var value= app.getProperty("code#" + id + "-value");
-			var data = app.getProperty("code#" + id + "-data");
+			var label = app.getProperty("code#" + id + "-label");
+			var value = app.getProperty("code#" + id + "-value");
+			var width = app.getProperty("code#" + id + "-width");
+			var height= app.getProperty("code#" + id + "-height");
+			var data  = app.getProperty("code#" + id + "-data");
 			if (data != null) {
-				return new Code(id, label, value, data);
+				return new Code(id, label, value, width, height, data);
 			}
 		}
 		return null;
