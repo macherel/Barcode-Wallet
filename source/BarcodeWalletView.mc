@@ -52,8 +52,8 @@ class BarcodeWalletView extends Ui.View {
 		var maxHeight= dcHeight * 0.8;
 		if (maxWidth == maxHeight) {
 			// For round device... Otherwise image is hidden in corner
-			maxWidth = maxWidth * 0.884;
-			maxHeight = maxHeight * 0.884;
+			maxWidth = maxWidth * 0.86;
+			maxHeight = maxHeight * 0.86;
 		}
 
 		var size = maxWidth<maxHeight?maxWidth:maxHeight;
@@ -149,12 +149,13 @@ class BarcodeWalletView extends Ui.View {
 		if (!(data instanceof Toybox.Lang.Array)) {
 			return;
 		}
+		var offsetY = (dc.getHeight() - code.height * moduleSize) / 2;
 		var nbLines = data.size();
-		if (nbLines == 1) {
+		if (code.height == 1) {
 			var barcodeHeight = dc.getHeight()/10;
 			nbLines = barcodeHeight / moduleSize;
+			offsetY = (dc.getHeight() - nbLines * 4 * moduleSize) / 2;
 		}
-		var offsetY = (dc.getHeight() - (nbLines-1) * 4 * moduleSize) / 2;
 
 		if (Settings.displayLabel) {
 			System.println("Display label");
