@@ -1,0 +1,20 @@
+<strings>
+    <string id="AppName">Barcode Wallet</string>
+	<string id="mainMenuTitle">Επίλεξε barcode</string>
+
+	<string id="loading">Φόρτωση...</string>
+	<string id="waitingPosition">Αναμονή για&#xA;τοποθέτηση...</string>
+	<string id="error">Σφάλμα</string>
+	<string id="errorNoBarcode">Δε βρέθηκε barcode</string>
+	<string id="errorNoToken">Παρακαλώ&#xA;επικοινώνησε&#xA;με&#xA;τον&#xA;προγραμματιστή</string>
+	<string id="errorUnknown">Άγνωστο σφάλμα</string>
+
+	<string id="token">Token</string>
+	<string id="displayLabel">Προβολή ετικέτας</string>
+	<string id="displayValue">Προβολή τιμής</string>
+	<string id="size">Μέγιστο όριο (-1 για απενεργοποίηση)</string>
+	<string id="usePosition">Ταξινόμηση κωδικών βάσει διαφοράς</string>
+	<string id="vibrate">Δόνηση</string>
+	<string id="debug">Debug</string>
+
+</strings>
