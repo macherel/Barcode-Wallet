@@ -11,6 +11,10 @@
 		<settingConfig type="boolean" />
 	</setting>
 
+	<setting propertyKey="@Properties.forceBacklight" title="@Strings.forceBacklight">
+		<settingConfig type="boolean" />
+	</setting>
+
 	<setting propertyKey="@Properties.size" title="@Strings.size">
 		<settingConfig type="numeric" />
 	</setting>
