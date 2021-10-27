@@ -9,6 +9,7 @@ module Settings {
 	var token;
 	var displayLabel;
 	var displayValue;
+	var forceBacklight;
 	var codes = null;
 	var size = -1;
 	var usePosition = false;
@@ -51,6 +52,7 @@ module Settings {
 		debug = _getProperty("debug");
 		displayLabel = _getProperty("displayLabel");
 		displayValue = _getProperty("displayValue");
+		forceBacklight = _getProperty("forceBacklight");
 		currentIndex = App.getApp().getProperty("currentIndex");
 		if (currentIndex == null) {
 			currentIndex = 0;
