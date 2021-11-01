@@ -16,6 +16,9 @@
 	<string id="size">Maximum limit (-1 to disable)</string>
 	<string id="usePosition">Sort codes by distance</string>
 	<string id="vibrate">Vibrate</string>
+	<string id="version">Version</string>
 	<string id="debug">Debug</string>
 
+	<string id="version1">1</string>
+	<string id="version2">2</string>
 </strings>

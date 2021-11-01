@@ -27,6 +27,13 @@
 		<settingConfig type="boolean" />
 	</setting>
 
+	<setting propertyKey="@Properties.version" title="@Strings.version">
+		<settingConfig type="list">
+			<listEntry value="1">@Strings.version1</listEntry>
+			<listEntry value="2">@Strings.version2</listEntry>
+		</settingConfig>
+	</setting>
+
 	<setting propertyKey="@Properties.debug" title="@Strings.debug">
 		<settingConfig type="boolean" />
 	</setting>

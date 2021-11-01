@@ -3,14 +3,20 @@ using Toybox.System as System;
 
 class Code {
 	var id;
+	var version;
 	var label;
 	var value;
 	var data;
 	var height;
 	var width;
 
-	function initialize(id, label, value, width, height, data) {
+	function initialize(id, version, label, value, width, height, data) {
 		self.id = id;
+		if(version == null) {
+			self.version = 1;
+		} else {
+			self.version = version.toNumber();
+		}
 		if(label == null) {
 			self.label = "";
 		} else {
@@ -33,6 +39,7 @@ class Code {
 	function fromResponseData(id, data) {
 		return new Code(
 			id,
+			data["version"],
 			data["name"],
 			data["value"],
 			data["width"],
@@ -44,6 +51,7 @@ class Code {
 	function toString() {
 		return "Code("
 			+ "id=" + self.id
+			+ ", version=" + self.id
 			+ ", label=" + self.label
 			+ ", value=" + self.value
 			+ ", width=" + self.width
