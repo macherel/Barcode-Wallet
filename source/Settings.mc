@@ -6,6 +6,7 @@ using Toybox.System as System;
 module Settings {
 
 	var debug = false;
+	var version = 1;
 	var token;
 	var displayLabel;
 	var displayValue;
@@ -49,6 +50,7 @@ module Settings {
 		token = _getProperty("token");
 		usePosition = _getProperty("usePosition");
 		vibrate = _getProperty("vibrate");
+		version = _getProperty("version");
 		debug = _getProperty("debug");
 		displayLabel = _getProperty("displayLabel");
 		displayValue = _getProperty("displayValue");
@@ -104,6 +106,7 @@ module Settings {
 			App.Storage.setValue(
 				"code#" + code.id,
 				{
+					"version" => code.version,
 					"label" => code.label,
 					"value" => code.value,
 					"width" => code.width,
@@ -113,6 +116,7 @@ module Settings {
 			);
 		} else {
 			var app = App.getApp();
+			app.setProperty("code#" + code.id + "-version", code.version);
 			app.setProperty("code#" + code.id + "-label", code.label);
 			app.setProperty("code#" + code.id + "-value", code.value);
 			app.setProperty("code#" + code.id + "-width", code.width);
@@ -125,17 +129,18 @@ module Settings {
 		if (App has :Storage) {
 			var code = App.Storage.getValue("code#" + id);
 			if (code != null) {
-				return new Code(id, code["label"], code["value"], code["width"], code["height"], code["data"]);
+				return new Code(id, code["version"], code["label"], code["value"], code["width"], code["height"], code["data"]);
 			}
 		} else {
 			var app = App.getApp();
+			var version = app.getProperty("code#" + id + "-version");
 			var label = app.getProperty("code#" + id + "-label");
 			var value = app.getProperty("code#" + id + "-value");
 			var width = app.getProperty("code#" + id + "-width");
 			var height= app.getProperty("code#" + id + "-height");
 			var data  = app.getProperty("code#" + id + "-data");
 			if (data != null) {
-				return new Code(id, label, value, width, height, data);
+				return new Code(id, version, label, value, width, height, data);
 			}
 		}
 		return null;
