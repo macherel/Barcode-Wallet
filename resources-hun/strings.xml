@@ -8,6 +8,7 @@
 	<string id="errorNoBarcode">Nincs vonalkód</string>
 	<string id="errorNoToken">Kérlek&#xA;fordulj a&#xA;fejlesztőhöz</string>
 	<string id="errorUnknown">Ismeretlen hiba</string>
+	<string id="gettingStarted">Utasítás</string>
 
 	<string id="token">Token</string>
 	<string id="displayLabel">Cimke megjelenítése</string>
