@@ -8,6 +8,7 @@
 	<string id="errorNoBarcode">Žádný&#xA;èárový kód</string>
 	<string id="errorNoToken">Prosím&#xA;kontaktujte&#xA;vývojáøe</string>
 	<string id="errorUnknown">Neznámá chyba</string>
+	<string id="gettingStarted">Instrukce</string>
 
 	<string id="token">Token</string>
 	<string id="displayLabel">Zobrazit popis</string>

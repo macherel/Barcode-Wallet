@@ -8,6 +8,7 @@
 	<string id="errorNoBarcode">Sin barcodes</string>
 	<string id="errorNoToken">Contacte&#xA;con el desarrollador</string>
 	<string id="errorUnknown">Error desconocido</string>
+	<string id="gettingStarted">Instrucciones</string>
 
 	<string id="token">Token</string>
 	<string id="displayLabel">Mostrar etiqueta</string>

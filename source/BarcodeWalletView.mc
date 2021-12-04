@@ -97,8 +97,8 @@ class BarcodeWalletView extends Ui.View {
 			return false;
 		}
 
-		System.println("Getting code #" + Settings.currentIndex + " of " + Settings.codes.size());
 		var code = Settings.currentCode;
+		System.println("Getting code #" + Settings.currentIndex + " of " + Settings.codes.size() + " : " + code);
 		if (code == null) {
 			code = new Code(-1, 1, null, null, 0, 0, null);
 		}
@@ -121,7 +121,7 @@ class BarcodeWalletView extends Ui.View {
 		// On round watch barcode can be bigger
 		var factor = (maxHeight==maxWidth && data.size()==1) ? 0.8 : 1;			
 		for(fontIndex = 0;
-			fontIndex < qrCodeFont.size() &&
+			fontIndex < qrCodeFont.size()-1 &&
 			(fontIndex+1+version) * data[0].length() <= size/factor + 0.001;
 			fontIndex++
 		) {
@@ -167,8 +167,15 @@ class BarcodeWalletView extends Ui.View {
 					displayMessage(dc, Ui.loadResource(Rez.Strings.loading));
 					return true;
 				case :NO_TOKEN:
+					Settings.currentCode = new Code(
+						-1, 1,
+						Ui.loadResource(Rez.Strings.gettingStarted),
+						"https://github.com/macherel/Barcode-Wallet/wiki/Getting-started",
+						37, 37,
+						["f8bbb8f0db54ef2f35c5ecb4c77180f8bbb8f","e2aaa2e038bce8b4793d6d21f4a9f0e2aaa2e","e38a6bab0e692fd7c231842117d975942f5c8","5c0474a7427716e5dbb721b8d8cc2ed5fcafc","675852a16f835e42ed97c6218866b04b19a76","cfea5da25183e290c2946bb72108ef2a95159","92490bad9b0d11b276e2ef97ccfc1ed5e3ef4","322a2ab07c4f179e168072d54c25f8a8f0e1e","f0eee0f06012cb2c32da76d25594aff9fb7e0","8888888080000808080800808880000088088"]
+					);
 					displayMessage(dc, Ui.loadResource(Rez.Strings.errorNoToken));
-					return true;
+					return false;
 				case :ERROR:
 					displayMessage(dc, Ui.loadResource(Rez.Strings.error) + " " + Settings.responseCode);
 					return true;
@@ -210,14 +217,17 @@ class BarcodeWalletView extends Ui.View {
 			dc.setColor (Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
 			dc.drawText(
 				(dc.getWidth()) / 2,
-				offsetY - dc.getFontHeight(Gfx.FONT_MEDIUM),
-				Gfx.FONT_MEDIUM,
+				offsetY - dc.getFontHeight(Gfx.FONT_TINY),
+				Gfx.FONT_TINY,
 				code.label,
 				Gfx.TEXT_JUSTIFY_CENTER
 			);
 		}
-
-		dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
+		if(Settings.state == :NO_TOKEN) {
+			dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_RED);
+		} else {
+			dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
+		}
 		for(var i=0; i<nbLines; i++) {
 			dc.drawText(
 					(dc.getWidth()) / 2,
