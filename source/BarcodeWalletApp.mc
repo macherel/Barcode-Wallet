@@ -43,6 +43,7 @@ class BarcodeWalletApp extends Application.AppBase {
 
 	function _initializeSettings() {
     	Settings.load();
+    	var codes = Settings.codes;
     	if (Settings.hasToken()) {
 			if(Settings.usePosition) {
 				System.println("Requesting position...");
@@ -51,7 +52,7 @@ class BarcodeWalletApp extends Application.AppBase {
 			} else {
     			ClientApi.loadUser(Settings.token, null);
 			}
-    	} else {
+    	} else if(Settings.codes == null || Settings.codes.size() == 0) {
     		Settings.state = :NO_TOKEN;
     	}
     	Ui.requestUpdate();

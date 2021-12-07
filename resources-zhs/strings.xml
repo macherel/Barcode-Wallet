@@ -8,6 +8,7 @@
 	<string id="errorNoBarcode">没有条码</string>
 	<string id="errorNoToken">请阅读&#xA;应用商店说明&#xA;创建条码</string>
 	<string id="errorUnknown">未知错误</string>
+	<string id="gettingStarted">指示</string>
 
 	<string id="token">令牌</string>
 	<string id="displayLabel">显示名称</string>

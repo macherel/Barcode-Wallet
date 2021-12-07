@@ -8,6 +8,7 @@
 	<string id="errorNoBarcode">Δε βρέθηκε barcode</string>
 	<string id="errorNoToken">Παρακαλώ&#xA;επικοινώνησε&#xA;με&#xA;τον&#xA;προγραμματιστή</string>
 	<string id="errorUnknown">Άγνωστο σφάλμα</string>
+	<string id="gettingStarted">Οδηγίες</string>
 
 	<string id="token">Token</string>
 	<string id="displayLabel">Προβολή ετικέτας</string>

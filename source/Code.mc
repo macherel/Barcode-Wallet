@@ -51,7 +51,7 @@ class Code {
 	function toString() {
 		return "Code("
 			+ "id=" + self.id
-			+ ", version=" + self.id
+			+ ", version=" + self.version
 			+ ", label=" + self.label
 			+ ", value=" + self.value
 			+ ", width=" + self.width

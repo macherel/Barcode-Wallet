@@ -8,6 +8,7 @@
 	<string id="errorNoBarcode">Pas de code&#xA;disponible</string>
 	<string id="errorNoToken">Merci de&#xA;contacter&#xA;le développeur</string>
 	<string id="errorUnknown">Erreur inconnue</string>
+	<string id="gettingStarted">Instructions</string>
 
 	<string id="token">Jeton</string>
 	<string id="displayLabel">Afficher les noms</string>
