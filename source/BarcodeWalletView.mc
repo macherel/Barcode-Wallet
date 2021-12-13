@@ -82,8 +82,8 @@ class BarcodeWalletView extends Ui.View {
 
 		var dcWidth = dc.getWidth();
 		var dcHeight = dc.getHeight();
-		var maxWidth = dcWidth  * 0.8;
-		var maxHeight= dcHeight * 0.8;
+		var maxWidth = dcWidth  * 0.81111;
+		var maxHeight= dcHeight * 0.81111;
 		if (maxWidth == maxHeight) {
 			// For round device... Otherwise image is hidden in corner
 			maxWidth = maxWidth * 0.86;

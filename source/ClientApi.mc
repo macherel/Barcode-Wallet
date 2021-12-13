@@ -9,7 +9,7 @@ module ClientApi {
 		Settings.responseCode = responseCode;
 		if (responseCode == 200 && data != null) {
 			var codes = [];
-			var responseCodes = data["qrcodes"];
+			var responseCodes = data;
 			for(var i=0; i<responseCodes.size(); i++) {
 				codes.add(Code.fromResponseData(i, responseCodes[i]));
 				System.println("code #" + i + " \"" + responseCodes[i]["name"] + "\" received.");
@@ -27,7 +27,7 @@ module ClientApi {
 	}
 	
 	function loadUser(token, latlng) {
-		var strUrl = "https://data-manager-api.qrcode.macherel.fr/users/" + Settings.token + "?v=" + Settings.version;
+		var strUrl = "https://data-manager-api.qrcode.macherel.fr/users/" + Settings.token + "/qrcodes?v=" + Settings.version;
 		var hasQueryParam = true;
 		if(latlng != null) {
 			strUrl += "?lat=" + latlng[:lat];
