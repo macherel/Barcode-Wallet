@@ -1,11 +1,11 @@
 <strings>
     <string id="AppName">Barcode Wallet</string>
-	<string id="mainMenuTitle">Vybrat èárový kód</string>
+	<string id="mainMenuTitle">Vybrat čárový kód</string>
 
-	<string id="loading">Naèítání...</string>
+	<string id="loading">Načítání...</string>
 	<string id="waitingPosition">Èekejte na&#xA;pozici...</string>
 	<string id="error">Chyba</string>
-	<string id="errorNoBarcode">Žádný&#xA;èárový kód</string>
+	<string id="errorNoBarcode">Žádný&#xA;čárový kód</string>
 	<string id="errorNoToken">Prosím&#xA;kontaktujte&#xA;vývojáøe</string>
 	<string id="errorUnknown">Neznámá chyba</string>
 	<string id="gettingStarted">Instrukce</string>
