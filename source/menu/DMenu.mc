@@ -120,7 +120,9 @@ class DMenu extends Ui.View
 	function onShow ()
 	{
 		drawMenu = new DrawMenu ();
-		Attention.backlight(false);
+		if(Settings.forceBacklight) {
+			Attention.backlight(true);
+		}
 	}
 	
 	function onHide ()
