@@ -7,15 +7,19 @@
 	<string id="error">错误</string>
 	<string id="errorNoBarcode">没有条码</string>
 	<string id="errorNoToken">请阅读&#xA;应用商店说明&#xA;创建条码</string>
-	<string id="errorUnknown">位置错误</string>
-	<string id="gettingStarted">指示</string>
+	<string id="errorUnknown">未知错误</string>
+	<string id="gettingStarted">开始</string>
 
 	<string id="token">令牌</string>
 	<string id="displayLabel">显示名称</string>
 	<string id="displayValue">显示数据</string>
+	<string id="forceBacklight">强制开启背光</string>
 	<string id="size">显示条码数量 (-1 不限制)</string>
-	<string id="usePosition">依据距离对条码排序</string>
+	<string id="usePosition">按距离对条码排序</string>
 	<string id="vibrate">震动</string>
+	<string id="version">版本</string>
 	<string id="debug">调试模式</string>
 
+	<string id="version1">1</string>
+	<string id="version2">2</string>
 </strings>
