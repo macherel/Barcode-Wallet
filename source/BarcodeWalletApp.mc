@@ -27,12 +27,13 @@ class BarcodeWalletApp extends Application.AppBase {
 
     // onStop() is called when your application is exiting
     function onStop(state) {
-		Attention.backlight(false);
+		if(Settings.forceBacklight) {
+			Attention.backlight(true);
+		}
     }
 
 	function onSettingsChanged() {
 		AppBase.onSettingsChanged();
-		Attention.backlight(false);
 		_initializeSettings();
 	}
 

@@ -1,0 +1,25 @@
+<strings>
+    <string id="AppName">Úschovòa èiarových kódov</string>
+	<string id="mainMenuTitle">Vyberte èiarový kód</string>
+
+	<string id="loading">Naèítavam...</string>
+	<string id="waitingPosition">Èakám na&#xA;pozíciu...</string>
+	<string id="error">Chyba</string>
+	<string id="errorNoBarcode">Žiadny èiarový kód</string>
+	<string id="errorNoToken">Prosím&#xA;kontaktujte&#xA;vývojára</string>
+	<string id="errorUnknown">Neznáma chyba</string>
+	<string id="gettingStarted">Zaèíname</string>
+
+	<string id="token">Token</string>
+	<string id="displayLabel">Zobrazený štítok</string>
+	<string id="displayValue">Zobrazená hodnota</string>
+	<string id="forceBacklight">Zapnú  podsvietenie</string>
+	<string id="size">Maximálny limit (-1 na zakázanie)</string>
+	<string id="usePosition">Zoraïte kódy pod¾a pozície</string>
+	<string id="vibrate">Vibrova </string>
+	<string id="version">Verzia</string>
+	<string id="debug">Ladenie</string>
+
+	<string id="version1">1</string>
+	<string id="version2">2</string>
+</strings>
