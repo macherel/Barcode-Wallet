@@ -4,6 +4,7 @@
             <iq:product id="approachs60"/>
             <iq:product id="approachs62"/>
             <iq:product id="d2air"/>
+            <iq:product id="d2airx10"/>
             <iq:product id="d2bravo"/>
             <iq:product id="d2bravo_titanium"/>
             <iq:product id="d2charlie"/>
@@ -59,6 +60,8 @@
             <iq:product id="fr945lte"/>
             <iq:product id="gpsmap66"/>
             <iq:product id="gpsmap86"/>
+            <iq:product id="instinct2"/>
+            <iq:product id="instinct2s"/>
             <iq:product id="legacyherocaptainmarvel"/>
             <iq:product id="legacyherofirstavenger"/>
             <iq:product id="legacysagadarthvader"/>
