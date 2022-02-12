@@ -1,22 +1,22 @@
 <strings>
-    <string id="AppName">Úschovòa èiarových kódov</string>
-	<string id="mainMenuTitle">Vyberte èiarový kód</string>
+    <string id="AppName">Barcode Wallet</string>
+	<string id="mainMenuTitle">Zvoľte kód</string>
 
-	<string id="loading">Naèítavam...</string>
-	<string id="waitingPosition">Èakám na&#xA;pozíciu...</string>
+	<string id="loading">Načítavam...</string>
+	<string id="waitingPosition">Čakám na&#xA;určenie polohy...</string>
 	<string id="error">Chyba</string>
-	<string id="errorNoBarcode">Žiadny èiarový kód</string>
+	<string id="errorNoBarcode">Žiadny čiarový kód</string>
 	<string id="errorNoToken">Prosím&#xA;kontaktujte&#xA;vývojára</string>
 	<string id="errorUnknown">Neznáma chyba</string>
-	<string id="gettingStarted">Zaèíname</string>
+	<string id="gettingStarted">Začíname</string>
 
 	<string id="token">Token</string>
-	<string id="displayLabel">Zobrazený štítok</string>
-	<string id="displayValue">Zobrazená hodnota</string>
-	<string id="forceBacklight">Zapnú  podsvietenie</string>
-	<string id="size">Maximálny limit (-1 na zakázanie)</string>
-	<string id="usePosition">Zoraïte kódy pod¾a pozície</string>
-	<string id="vibrate">Vibrova </string>
+	<string id="displayLabel">Zobraziť názov kódu</string>
+	<string id="displayValue">Zobraziť hodnotu kódu</string>
+	<string id="forceBacklight">Zapnúť podsvietenie</string>
+	<string id="size">Maximálny počet kódov (-1 bez limitu)</string>
+	<string id="usePosition">Zobraziť podľa polohy</string>
+	<string id="vibrate">Zapnúť vibrovanie</string>
 	<string id="version">Verzia</string>
 	<string id="debug">Ladenie</string>
 
