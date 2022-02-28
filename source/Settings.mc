@@ -11,11 +11,11 @@ module Settings {
 	var displayLabel;
 	var displayValue;
 	var forceBacklight;
-	var codes = null;
+	var codes = [];
 	var size = -1;
 	var usePosition = false;
 	var vibrate = true;
-	var currentIndex = null;
+	var currentIndex = -1;
 	var currentCode = null;
 	var state = :UNKNOWN; // UNKNOWN, READY, ERROR, LOADING, NO_TOKEN
 	var responseCode = null;
@@ -88,6 +88,9 @@ module Settings {
 			i++;
 		}
 		validateCurrentIndex();
+		if(currentCode == null) {
+			currentCode = _getCurrentCode();
+		}
 	}
 
 	function validateCurrentIndex() {
