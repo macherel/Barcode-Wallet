@@ -1,6 +1,6 @@
 <properties>
 	<property id="token" type="string"></property>
-	<property id="displayLabel" type="boolean">true</property>
+	<property id="displayLabel" type="boolean">false</property>
 	<property id="displayValue" type="boolean">false</property>
 	<property id="forceBacklight" type="boolean">false</property>
 	<property id="size" type="number">-1</property>
