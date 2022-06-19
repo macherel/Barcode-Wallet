@@ -19,6 +19,7 @@
             <iq:product id="edge1030"/>
             <iq:product id="edge1030bontrager"/>
             <iq:product id="edge1030plus"/>
+            <iq:product id="edge1040"/>
             <iq:product id="edge520plus"/>
             <iq:product id="edge530"/>
             <iq:product id="edge820"/>
@@ -50,6 +51,10 @@
             <iq:product id="fr235"/>
             <iq:product id="fr245"/>
             <iq:product id="fr245m"/>
+            <iq:product id="fr255"/>
+            <iq:product id="fr255m"/>
+            <iq:product id="fr255s"/>
+            <iq:product id="fr255sm"/>
             <iq:product id="fr55"/>
             <iq:product id="fr630"/>
             <iq:product id="fr645"/>
@@ -60,6 +65,7 @@
             <iq:product id="fr935"/>
             <iq:product id="fr945"/>
             <iq:product id="fr945lte"/>
+            <iq:product id="fr955"/>
             <iq:product id="gpsmap66"/>
             <iq:product id="gpsmap86"/>
             <iq:product id="instinct2"/>
