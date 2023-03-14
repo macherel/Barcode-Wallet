@@ -1,5 +1,6 @@
-using Toybox.WatchUi as Ui;
-using Toybox.Graphics as Gfx;
+import Toybox.Lang;
+import Toybox.WatchUi;
+import Toybox.Graphics;
 
 var SCALE = 100;
 
@@ -8,9 +9,9 @@ var SCALE = 100;
 // Any overridden drawing should be constrained within the items boundaries, i.e. y .. y + height / 3.
 class DMenuItem
 {
-	const LABEL_FONT = Gfx.FONT_SMALL;
-	const SELECTED_LABEL_FONT = Gfx.FONT_LARGE;
-	const VALUE_FONT = Gfx.FONT_XTINY;
+	const LABEL_FONT = Graphics.FONT_SMALL;
+	const SELECTED_LABEL_FONT = Graphics.FONT_LARGE;
+	const VALUE_FONT = Graphics.FONT_XTINY;
 	const PAD = 0;
 
 	var	id, label, value, userData;
@@ -47,15 +48,15 @@ class DMenuItem
 	
 	function setHighlightColor (dc)
 	{
-		dc.setColor (Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
+		dc.setColor (Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
 	}
 	
 	function setColor (dc)
 	{
-		dc.setColor (Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
+		dc.setColor (Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
 	}
 	
-	function drawLabel (dc, y)
+	function drawLabel (dc as Dc, y)
 	{
 		var width = dc.getWidth ();
 		var h3 = dc.getHeight () / 3;
@@ -63,10 +64,10 @@ class DMenuItem
 		var labDims = dc.getTextDimensions (lab, LABEL_FONT);
 		var yL = y + (h3 - labDims[1]) / 2;
 
-		dc.drawText (width / 2, yL, LABEL_FONT, lab, Gfx.TEXT_JUSTIFY_CENTER);
+		dc.drawText (width / 2, yL, LABEL_FONT, lab, Graphics.TEXT_JUSTIFY_CENTER);
 	}
 
-	function drawHighlightedLabel (dc, y)
+	function drawHighlightedLabel (dc as Dc, y)
 	{
 		var width = dc.getWidth ();
 		var h3 = dc.getHeight () / 3;
@@ -88,19 +89,19 @@ class DMenuItem
 			yL = y + (h3 - h) / 2;
 			yV = yL + labDims[1] + PAD;
 
-			dc.drawText (width / 2, yV, VALUE_FONT, val, Gfx.TEXT_JUSTIFY_CENTER);
+			dc.drawText (width / 2, yV, VALUE_FONT, val, Graphics.TEXT_JUSTIFY_CENTER);
 		}
 		else
 		{
 			yL = y + (h3 - labDims[1]) / 2;
 		}
-		dc.drawText (width / 2, yL, SELECTED_LABEL_FONT, lab, Gfx.TEXT_JUSTIFY_CENTER);
+		dc.drawText (width / 2, yL, SELECTED_LABEL_FONT, lab, Graphics.TEXT_JUSTIFY_CENTER);
 	}
 }
 
-class DMenu extends Ui.View
+class DMenu extends WatchUi.View
 {
-	var menuArray;
+	var menuArray as Array;
 	var title;
 	var index;
 
@@ -157,12 +158,12 @@ class DMenu extends Ui.View
 		if (offset == 1)
 		{
 			// Scroll down. Use 1000 as end value as cannot use 1. Scale as necessary in draw call.
-			Ui.animate (drawMenu, :t, Ui.ANIM_TYPE_LINEAR, SCALE, 0, ANIM_TIME, null);
+			WatchUi.animate (drawMenu, :t, WatchUi.ANIM_TYPE_LINEAR, SCALE, 0, ANIM_TIME, null);
 		}
 		else
 		{
 			// Scroll up.
-			Ui.animate (drawMenu, :t, Ui.ANIM_TYPE_LINEAR, -SCALE, 0, ANIM_TIME, null);
+			WatchUi.animate (drawMenu, :t, WatchUi.ANIM_TYPE_LINEAR, -SCALE, 0, ANIM_TIME, null);
 		}
 //*/		
 		nextIndex = index + offset;
@@ -172,7 +173,7 @@ class DMenu extends Ui.View
 		
 		nextIndex = nextIndex % menuArray.size ();
 		
-		Ui.requestUpdate();
+		WatchUi.requestUpdate();
 		index = nextIndex;
 	}
 	
@@ -190,7 +191,7 @@ class DMenu extends Ui.View
 		var width = dc.getWidth ();
 		var height = dc.getHeight ();
 		
-		dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_BLACK);
+		dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
 		dc.fillRectangle(0, 0, width, height);
 
 		// Draw the menu items.
@@ -202,7 +203,7 @@ class DMenu extends Ui.View
 		
 		// Draw the decorations.
 		var h3 = height / 3;
-		dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
+		dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
 		dc.setPenWidth (2);
 		dc.drawLine (0, h3, width, h3);
 		dc.drawLine (0, h3 * 2, width, h3 * 2);
@@ -221,7 +222,7 @@ class DMenu extends Ui.View
 		var y;
 
 		dc.setPenWidth (1);
-		dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
+		dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
 		
 		if (nextIndex != 0)
 		{
@@ -248,12 +249,13 @@ class DMenu extends Ui.View
 }
 
 // Done as a class so it can be animated.
-class DrawMenu extends Ui.Drawable
+class DrawMenu extends WatchUi.Drawable
 {
-	const TITLE_FONT = Gfx.FONT_SMALL;
+	const TITLE_FONT = Graphics.FONT_SMALL;
 
 	var t = 0;				// 'time' in the animation cycle 0...1000 or -1000...0.
-	var index, nextIndex, menu;
+	var index, nextIndex;
+	var menu as DMenu?;
 			
 	function initialize ()
 	{
@@ -282,7 +284,7 @@ class DrawMenu extends Ui.Drawable
 		}
 	}
 	
-	function drawTitle (dc, y)
+	function drawTitle (dc as Dc, y)
 	{		
 		var width = dc.getWidth ();
 		var h3 = dc.getHeight () / 3;
@@ -293,20 +295,20 @@ class DrawMenu extends Ui.Drawable
 			return;
 		}
 
-		dc.setColor (Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
+		dc.setColor (Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
 		dc.fillRectangle (0, y, width, h3);
 
 		if (menu.title != null)
 		{
 			var dims = dc.getTextDimensions (menu.title, TITLE_FONT);
 			var h = (h3 - dims[1]) / 2;
-			dc.setColor (Gfx.COLOR_WHITE, Gfx.COLOR_BLACK);
-			dc.drawText (width / 2, y + h, TITLE_FONT, menu.title, Gfx.TEXT_JUSTIFY_CENTER);
+			dc.setColor (Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
+			dc.drawText (width / 2, y + h, TITLE_FONT, menu.title, Graphics.TEXT_JUSTIFY_CENTER);
 		}
 	}
 	
 	// highlight is the selected menu item that can optionally show a value.
-	function drawItem (dc, idx, y, highlight)
+	function drawItem (dc as Dc, idx, y, highlight)
 	{
 		var h3 = dc.getHeight () / 3;
 
@@ -321,7 +323,7 @@ class DrawMenu extends Ui.Drawable
 	}
 }
 
-class DMenuDelegate extends Ui.BehaviorDelegate 
+class DMenuDelegate extends WatchUi.BehaviorDelegate 
 {
 	hidden var menu;
 	hidden var userMenuDelegate;
@@ -360,13 +362,13 @@ class DMenuDelegate extends Ui.BehaviorDelegate
 	function onSelect ()
 	{
 		userMenuDelegate.onMenuItem (menu.selectedItem ());
-		Ui.requestUpdate();
+		WatchUi.requestUpdate();
 		return true;
 	}
 	
 	function onBack () 
 	{
-		Ui.popView (Ui.SLIDE_RIGHT);
+		WatchUi.popView (WatchUi.SLIDE_RIGHT);
 		return true;
 	}
 }

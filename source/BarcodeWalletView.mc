@@ -1,9 +1,10 @@
-using Toybox.WatchUi as Ui;
-using Toybox.Graphics as Gfx;
+import Toybox.Lang;
+import Toybox.WatchUi;
+import Toybox.Graphics;
 
-class BarcodeWalletView extends Ui.View {
+class BarcodeWalletView extends WatchUi.View {
 
-	var qrCodeFonts = [];
+	var qrCodeFonts as Array<Array<Resource>> = [];
 
 	function initialize() {
 		View.initialize();
@@ -14,55 +15,55 @@ class BarcodeWalletView extends Ui.View {
 		System.println("> onLayout");	
 
 		var qrCodeFont1 = [
-			Ui.loadResource(Rez.Fonts.qrcode1_1),
-			Ui.loadResource(Rez.Fonts.qrcode1_2),
-			Ui.loadResource(Rez.Fonts.qrcode1_3),
-			Ui.loadResource(Rez.Fonts.qrcode1_4),
-			Ui.loadResource(Rez.Fonts.qrcode1_5),
-			Ui.loadResource(Rez.Fonts.qrcode1_6),
-			Ui.loadResource(Rez.Fonts.qrcode1_7),
-			Ui.loadResource(Rez.Fonts.qrcode1_8),
-			Ui.loadResource(Rez.Fonts.qrcode1_9),
-			Ui.loadResource(Rez.Fonts.qrcode1_10),
-			Ui.loadResource(Rez.Fonts.qrcode1_11),
-			Ui.loadResource(Rez.Fonts.qrcode1_12),
-			Ui.loadResource(Rez.Fonts.qrcode1_13),
-			Ui.loadResource(Rez.Fonts.qrcode1_14),
-			Ui.loadResource(Rez.Fonts.qrcode1_15),
-			Ui.loadResource(Rez.Fonts.qrcode1_16)
+			WatchUi.loadResource(Rez.Fonts.qrcode1_1),
+			WatchUi.loadResource(Rez.Fonts.qrcode1_2),
+			WatchUi.loadResource(Rez.Fonts.qrcode1_3),
+			WatchUi.loadResource(Rez.Fonts.qrcode1_4),
+			WatchUi.loadResource(Rez.Fonts.qrcode1_5),
+			WatchUi.loadResource(Rez.Fonts.qrcode1_6),
+			WatchUi.loadResource(Rez.Fonts.qrcode1_7),
+			WatchUi.loadResource(Rez.Fonts.qrcode1_8),
+			WatchUi.loadResource(Rez.Fonts.qrcode1_9),
+			WatchUi.loadResource(Rez.Fonts.qrcode1_10),
+			WatchUi.loadResource(Rez.Fonts.qrcode1_11),
+			WatchUi.loadResource(Rez.Fonts.qrcode1_12),
+			WatchUi.loadResource(Rez.Fonts.qrcode1_13),
+			WatchUi.loadResource(Rez.Fonts.qrcode1_14),
+			WatchUi.loadResource(Rez.Fonts.qrcode1_15),
+			WatchUi.loadResource(Rez.Fonts.qrcode1_16)
 		];
 		var qrCodeFont2 = [
-			Ui.loadResource(Rez.Fonts.qrcode2_2),
-			Ui.loadResource(Rez.Fonts.qrcode2_3),
-			Ui.loadResource(Rez.Fonts.qrcode2_4),
-			Ui.loadResource(Rez.Fonts.qrcode2_5),
-			Ui.loadResource(Rez.Fonts.qrcode2_6),
-			Ui.loadResource(Rez.Fonts.qrcode2_7),
-			Ui.loadResource(Rez.Fonts.qrcode2_8),
-			Ui.loadResource(Rez.Fonts.qrcode2_9),
-			Ui.loadResource(Rez.Fonts.qrcode2_10),
-			Ui.loadResource(Rez.Fonts.qrcode2_11),
-			Ui.loadResource(Rez.Fonts.qrcode2_12),
-			Ui.loadResource(Rez.Fonts.qrcode2_13),
-			Ui.loadResource(Rez.Fonts.qrcode2_14),
-			Ui.loadResource(Rez.Fonts.qrcode2_15),
-			Ui.loadResource(Rez.Fonts.qrcode2_16),
-			Ui.loadResource(Rez.Fonts.qrcode2_17),
-			Ui.loadResource(Rez.Fonts.qrcode2_18),
-			Ui.loadResource(Rez.Fonts.qrcode2_19),
-			Ui.loadResource(Rez.Fonts.qrcode2_20),
-			Ui.loadResource(Rez.Fonts.qrcode2_21),
-			Ui.loadResource(Rez.Fonts.qrcode2_22),
-			Ui.loadResource(Rez.Fonts.qrcode2_23),
-			Ui.loadResource(Rez.Fonts.qrcode2_24),
-			Ui.loadResource(Rez.Fonts.qrcode2_25),
-			Ui.loadResource(Rez.Fonts.qrcode2_26),
-			Ui.loadResource(Rez.Fonts.qrcode2_27),
-			Ui.loadResource(Rez.Fonts.qrcode2_28),
-			Ui.loadResource(Rez.Fonts.qrcode2_29),
-			Ui.loadResource(Rez.Fonts.qrcode2_30),
-			Ui.loadResource(Rez.Fonts.qrcode2_31),
-			Ui.loadResource(Rez.Fonts.qrcode2_32)
+			WatchUi.loadResource(Rez.Fonts.qrcode2_2),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_3),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_4),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_5),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_6),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_7),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_8),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_9),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_10),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_11),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_12),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_13),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_14),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_15),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_16),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_17),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_18),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_19),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_20),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_21),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_22),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_23),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_24),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_25),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_26),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_27),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_28),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_29),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_30),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_31),
+			WatchUi.loadResource(Rez.Fonts.qrcode2_32)
 		];
 		qrCodeFonts = [ qrCodeFont1, qrCodeFont2 ];
 		System.println("< onLayout");
@@ -94,7 +95,7 @@ class BarcodeWalletView extends Ui.View {
 
 		if(_handleErrors(dc)) {
 			System.println("< OnUpdate - error");
-			return false;
+			return;
 		}
 
 		var code = Settings.currentCode;
@@ -105,9 +106,9 @@ class BarcodeWalletView extends Ui.View {
 		var data = code.data;
 
 		if (data == null) {
-			displayMessage(dc, code.label + "\n" + Ui.loadResource(Rez.Strings.error));
+			displayMessage(dc, code.label + "\n" + WatchUi.loadResource(Rez.Strings.error));
 			System.println("< OnUpdate - no data");
-			return false;
+			return;
 		}
 
 		System.println("Displaying code " + code);
@@ -146,7 +147,7 @@ class BarcodeWalletView extends Ui.View {
 			Attention.backlight(1.0);
 		}
 		System.println("< OnUpdate");
-		return true;
+		return;
 	}
 
 	// Called when this View is removed from the screen. Save the
@@ -161,43 +162,43 @@ class BarcodeWalletView extends Ui.View {
 				case :READY:
 					break;
 				case :WAITING_POSITION:
-					displayMessage(dc, Ui.loadResource(Rez.Strings.waitingPosition));
+					displayMessage(dc, WatchUi.loadResource(Rez.Strings.waitingPosition));
 					return true;
 				case :LOADING:
-					displayMessage(dc, Ui.loadResource(Rez.Strings.loading));
+					displayMessage(dc, WatchUi.loadResource(Rez.Strings.loading));
 					return true;
 				case :NO_TOKEN:
 					Settings.currentCode = new Code(
 						-1, 1,
-						Ui.loadResource(Rez.Strings.gettingStarted),
+						WatchUi.loadResource(Rez.Strings.gettingStarted),
 						"https://github.com/macherel/Barcode-Wallet/wiki/Getting-started",
 						37, 37,
 						["f8bbb8f0db54ef2f35c5ecb4c77180f8bbb8f","e2aaa2e038bce8b4793d6d21f4a9f0e2aaa2e","e38a6bab0e692fd7c231842117d975942f5c8","5c0474a7427716e5dbb721b8d8cc2ed5fcafc","675852a16f835e42ed97c6218866b04b19a76","cfea5da25183e290c2946bb72108ef2a95159","92490bad9b0d11b276e2ef97ccfc1ed5e3ef4","322a2ab07c4f179e168072d54c25f8a8f0e1e","f0eee0f06012cb2c32da76d25594aff9fb7e0","8888888080000808080800808880000088088"]
 					);
-					displayMessage(dc, Ui.loadResource(Rez.Strings.errorNoToken));
+					displayMessage(dc, WatchUi.loadResource(Rez.Strings.errorNoToken));
 					return false;
 				case :ERROR:
-					displayMessage(dc, Ui.loadResource(Rez.Strings.error) + " " + Settings.responseCode);
+					displayMessage(dc, WatchUi.loadResource(Rez.Strings.error) + " " + Settings.responseCode);
 					return true;
 				default:
 					System.println("Unknown state");
-					displayMessage(dc, Ui.loadResource(Rez.Strings.errorUnknown));
+					displayMessage(dc, WatchUi.loadResource(Rez.Strings.errorUnknown));
 					return true;
 			}
 		}
 		if (Settings.codes.size() == 0) {
-			displayMessage(dc, Ui.loadResource(Rez.Strings.errorNoBarcode));
+			displayMessage(dc, WatchUi.loadResource(Rez.Strings.errorNoBarcode));
 			return true;
 		}
 		if(Settings.currentIndex < 0 || Settings.currentIndex >= Settings.codes.size()) {
 			System.println("Wrong index");
-			displayMessage(dc, Ui.loadResource(Rez.Strings.errorUnknown));
+			displayMessage(dc, WatchUi.loadResource(Rez.Strings.errorUnknown));
 			return true;
 		}
 		return false;
 	}
 
-	function _drawQRCode(dc, code, font, moduleSize, version) {
+	function _drawQRCode(dc, code as Code, font, moduleSize, version) {
 		var dy = version==1 ? 4 : 2;
 		var fontHeight = moduleSize * dy;
 		var data = code.data;
@@ -214,13 +215,13 @@ class BarcodeWalletView extends Ui.View {
 
 		if (Settings.displayLabel) {
 			System.println("Display label");
-			dc.setColor (Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
+			dc.setColor (Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
 			dc.drawText(
 				(dc.getWidth()) / 2,
-				offsetY - dc.getFontHeight(Gfx.FONT_TINY),
-				Gfx.FONT_TINY,
+				offsetY - dc.getFontHeight(Graphics.FONT_TINY),
+				Graphics.FONT_TINY,
 				code.label,
-				Gfx.TEXT_JUSTIFY_CENTER
+				Graphics.TEXT_JUSTIFY_CENTER
 			);
 		}
 		if(Settings.state == :NO_TOKEN) {
@@ -234,33 +235,33 @@ class BarcodeWalletView extends Ui.View {
 					offsetY + (i * fontHeight),
 					font,
 					data.size() == 1 ? data[0] : data[i], // For barcode, repeat the first raw
-					Gfx.TEXT_JUSTIFY_CENTER
+					Graphics.TEXT_JUSTIFY_CENTER
 			);
 		}
 
 		if (Settings.displayValue) {
 			System.println("Display Value");
-			dc.setColor (Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
+			dc.setColor (Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
 			dc.drawText(
 				(dc.getWidth()) / 2,
 				offsetY + ((data.size() == 1 ? nbLines * dy : data[0].length()) * moduleSize),
-				Gfx.FONT_XTINY,
+				Graphics.FONT_XTINY,
 				code.value,
-				Gfx.TEXT_JUSTIFY_CENTER
+				Graphics.TEXT_JUSTIFY_CENTER
 			);
 		}
 	}
 
 	function displayMessage(dc, message) {
 		System.println("Display message \"" + message + "\".");
-		dc.setColor (Gfx.COLOR_WHITE, Gfx.COLOR_BLACK);
+		dc.setColor (Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
 		dc.clear();
 		dc.drawText(
 			(dc.getWidth()) / 2,
 			(dc.getHeight()) / 2,
-			Gfx.FONT_MEDIUM,
+			Graphics.FONT_MEDIUM,
 			message,
-			Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER
+			Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
 		);
 	}
 

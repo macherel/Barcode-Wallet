@@ -1,32 +1,12 @@
-using Toybox.Communications as Comm;
-using Toybox.WatchUi as Ui;
-using Toybox.Lang as Lang;
-using Toybox.System as System;
-using Toybox.Attention as Attention;
+import Toybox.Communications;
+import Toybox.WatchUi;
+import Toybox.Lang;
+import Toybox.System;
+import Toybox.Attention;
 
-module ClientApi {
-	function _onUserLoaded(responseCode, data) {
-		Settings.responseCode = responseCode;
-		if (responseCode == 200 && data != null) {
-			var codes = [];
-			var responseCodes = data;
-			for(var i=0; i<responseCodes.size(); i++) {
-				codes.add(Code.fromResponseData(i, responseCodes[i]));
-				System.println("code #" + i + " \"" + responseCodes[i]["name"] + "\" received.");
-			}
-			Settings.storeCodes(codes);
-			_vibrate();
-			Settings.state = :READY;
-		} else {
-			Settings.state = :ERROR;
-			System.println("Error while loading user (" + responseCode + ")");
-			// nothing to do, data will be loaded next time
-		}
-		System.println("<<< loadUser");
-		Ui.requestUpdate();
-	}
-	
-	function loadUser(token, latlng) {
+class ClientApi {
+
+	public function loadUser(token as String, latlng as Dictionary) {
 		var strUrl = "https://data-manager-api.qrcode.macherel.fr/users/" + Settings.token + "/qrcodes?v=" + Settings.version;
 		var hasQueryParam = true;
 		if(latlng != null) {
@@ -42,21 +22,47 @@ module ClientApi {
 		if(Settings.state != :READY) {
 			Settings.state = :LOADING;
 		}
-		Comm.makeWebRequest(
+
+ 		Communications.makeWebRequest(
 			strUrl,
-			null,
+			{},
 			{
-				:methods => Comm.HTTP_REQUEST_METHOD_GET,
+				:methods => Communications.HTTP_REQUEST_METHOD_GET,
 				:headers => {
-					"Content-Type" => Comm.REQUEST_CONTENT_TYPE_JSON
+					"Content-Type" => Communications.REQUEST_CONTENT_TYPE_JSON
 				},
-				:responseType => Comm.HTTP_RESPONSE_CONTENT_TYPE_JSON
+				:responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
 			},
-			new Lang.Method(ClientApi, :_onUserLoaded)
+			method(:onReceive)
 		);
 	}
-	
-	function _vibrate() {
+
+	//! Receive the data from the web request
+    //! @param responseCode The server response code
+    //! @param data Content from a successful request
+    public function onReceive(responseCode as Number, data as Dictionary<String, Object?> or String or Null) as Void {
+		Settings.responseCode = responseCode;
+		System.println(data);
+		if (responseCode == 200 && data instanceof Array) {
+			var codes = [];
+			var responseCodes = (data as Array<Dictionary>);
+			for(var i=0; i<responseCodes.size(); i++) {
+				codes.add(Code.fromResponseData(i, responseCodes[i]));
+				System.println("code #" + i + " \"" + responseCodes[i]["name"] + "\" received.");
+			}
+			Settings.storeCodes(codes);
+			_vibrate();
+			Settings.state = :READY;
+		} else {
+			Settings.state = :ERROR;
+			System.println("Error while loading user (" + responseCode + ")");
+			// nothing to do, data will be loaded next time
+		}
+		System.println("<<< loadUser");
+		WatchUi.requestUpdate();
+	}
+
+	private function _vibrate() {
 		if (Settings.vibrate && Attention has :vibrate) {
 			Attention.vibrate([new Attention.VibeProfile(50, 1000)]);
 		}

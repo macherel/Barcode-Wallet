@@ -7,7 +7,7 @@ class BarcodeWalletMenuDelegate extends Ui.MenuInputDelegate {
 		MenuInputDelegate.initialize ();
 	}
 
-	function onMenuItem (item) {
+	function onMenuItem (item as DMenuItem) {
 		System.println("Select code #" + item.id);
 		Settings.zoom = false;
 		Settings.setCurrentIndex(item.id);

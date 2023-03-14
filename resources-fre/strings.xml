@@ -17,6 +17,10 @@
 	<string id="size">Limite max (-1 si pas de limite)</string>
 	<string id="usePosition">Trier par distance</string>
 	<string id="vibrate">Vibrer</string>
+	<string id="version">Version</string>
 	<string id="debug">Debug</string>
+
+	<string id="version1">1</string>
+	<string id="version2">2</string>
 
 </strings>

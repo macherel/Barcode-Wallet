@@ -1,16 +1,17 @@
-using Toybox.Application as App;
-using Toybox.System as System;
+import Toybox.Application;
+import Toybox.Lang;
+import Toybox.System;
 
 class Code {
 	var id;
 	var version;
 	var label;
 	var value;
-	var data;
+	var data as Array<String>;
 	var height;
 	var width;
 
-	function initialize(id, version, label, value, width, height, data) {
+	function initialize(id, version, label, value, width, height, data as Array<String>?) {
 		self.id = id;
 		if(version == null) {
 			self.version = 1;
@@ -36,7 +37,7 @@ class Code {
 		self.data = data;
 	}
 
-	function fromResponseData(id, data) {
+	function fromResponseData(id, data as Dictionary) {
 		return new Code(
 			id,
 			data["version"],

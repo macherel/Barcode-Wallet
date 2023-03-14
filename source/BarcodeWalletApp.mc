@@ -3,7 +3,9 @@ using Toybox.WatchUi as Ui;
 
 class BarcodeWalletApp extends Application.AppBase {
 
-	function onPosition(info) {
+	private var clientApi = new ClientApi();
+
+	public function onPosition(info as Toybox.Position.Info) as Void {
 		var myLocation = info.position.toDegrees();
 		System.println("Position received : " + myLocation);
 		ClientApi.loadUser(
@@ -42,7 +44,7 @@ class BarcodeWalletApp extends Application.AppBase {
         return [ new BarcodeWalletView(), new BarcodeWalletDelegate() ];
     }
 
-	function _initializeSettings() {
+	private function _initializeSettings() {
     	Settings.load();
     	var codes = Settings.codes;
     	if (Settings.hasToken()) {
@@ -51,7 +53,7 @@ class BarcodeWalletApp extends Application.AppBase {
 				Settings.state = :WAITING_POSITION;
 				Position.enableLocationEvents(Position.LOCATION_ONE_SHOT, method(:onPosition));
 			} else {
-    			ClientApi.loadUser(Settings.token, null);
+    			clientApi.loadUser(Settings.token, null);
 			}
     	} else if(Settings.codes == null || Settings.codes.size() == 0) {
     		Settings.state = :NO_TOKEN;
