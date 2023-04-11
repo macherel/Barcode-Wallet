@@ -11,7 +11,7 @@ class Code {
 	var height;
 	var width;
 
-	function initialize(id, version, label, value, width, height, data as Array<String>?) {
+	function initialize(id as Number, version as Number?, label as String?, value as String?, width as Number?, height as Number?, data as Array<String>?) {
 		self.id = id;
 		if(version == null) {
 			self.version = 1;

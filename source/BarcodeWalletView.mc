@@ -117,7 +117,6 @@ class BarcodeWalletView extends WatchUi.View {
 		////////////////////////////////////////////////////////////////
 		var version = code.version;
 		var qrCodeFont = qrCodeFonts[version-1];
-		var fontSizeStep = 1 / version;
 		var fontIndex = 1;
 		// On round watch barcode can be bigger
 		var factor = (maxHeight==maxWidth && data.size()==1) ? 0.8 : 1;			

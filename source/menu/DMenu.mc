@@ -264,10 +264,8 @@ class DrawMenu extends WatchUi.Drawable
 	
 	function draw (dc)
 	{
-		var width = dc.getWidth ();
 		var height = dc.getHeight ();
 		var h3 = height / 3;
-		var items = menu.menuArray.size ();
 		
 		nextIndex = menu.nextIndex;
 
