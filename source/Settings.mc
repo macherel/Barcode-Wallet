@@ -8,6 +8,8 @@ class Settings {
 
 	public static var INSTANCE = new Settings();
 
+	private static var log = Logger.INSTANCE;
+
 	public var debug = false;
 	public var version = 1;
 	public var token;
@@ -33,7 +35,7 @@ class Settings {
 	}
 	
 	public function setCurrentIndex(index) {
-		System.println("Change currentIndex to "+ Settings.currentIndex);		
+		log.debug("Change currentIndex to {}", [self.currentIndex]);		
 		currentIndex = index;
 		currentCode = _getCurrentCode();
 		setProperty("currentIndex", index);
@@ -76,7 +78,7 @@ class Settings {
 			i++;
 			code = _loadCode(i);
 		}
-		System.println(codes.size() + " codes loaded.");
+		log.debug("{} codes loaded.", [codes.size()]);
 		return codes;
 	}
 	
@@ -104,7 +106,7 @@ class Settings {
 		if(currentIndex < 0) {
 			setCurrentIndex(0);
 		} else {
-			System.println("Settings.currentIndex = "+ Settings.currentIndex);
+			log.debug("Settings.currentIndex = {}", [self.currentIndex]);
 		}
 	}
 

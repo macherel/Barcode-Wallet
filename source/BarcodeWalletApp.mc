@@ -4,13 +4,14 @@ using Toybox.WatchUi as Ui;
 class BarcodeWalletApp extends Application.AppBase {
 
 	private static var settings = Settings.INSTANCE;
+	private static var log = Logger.INSTANCE;
 
-	private var clientApi = new ClientApi();
+	private var clientApi = ClientApi.INSTANCE;
 
 	public function onPosition(info as Toybox.Position.Info) as Void {
 		var myLocation = info.position.toDegrees();
-		System.println("Position received : " + myLocation);
-		ClientApi.loadUser(
+		log.debug("Position received : {}", [myLocation]);
+		clientApi.loadUser(
 			settings.token,
 			{
 				:lat => myLocation[0],
@@ -50,7 +51,7 @@ class BarcodeWalletApp extends Application.AppBase {
     	settings.load();
     	if (settings.hasToken()) {
 			if(settings.usePosition) {
-				System.println("Requesting position...");
+				log.debug("Requesting position...", null);
 				settings.state = :WAITING_POSITION;
 				Position.enableLocationEvents(Position.LOCATION_ONE_SHOT, method(:onPosition));
 			} else {

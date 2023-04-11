@@ -4,6 +4,9 @@ import Toybox.Graphics;
 
 class BarcodeWalletView extends WatchUi.View {
 
+	private static var settings = Settings.INSTANCE;
+	private static var log = Logger.INSTANCE;
+
 	var qrCodeFonts as Array<Array<Resource>> = [];
 
 	function initialize() {
@@ -12,7 +15,7 @@ class BarcodeWalletView extends WatchUi.View {
 
 	// Load your resources here
 	function onLayout(dc) {
-		System.println("> onLayout");	
+		log.debug("> onLayout", null);	
 
 		var qrCodeFont1 = [
 			WatchUi.loadResource(Rez.Fonts.qrcode1_1),
@@ -66,7 +69,7 @@ class BarcodeWalletView extends WatchUi.View {
 			WatchUi.loadResource(Rez.Fonts.qrcode2_32)
 		];
 		qrCodeFonts = [ qrCodeFont1, qrCodeFont2 ];
-		System.println("< onLayout");
+		log.debug("< onLayout", null);
 	}
 
 	// Called when this View is brought to the foreground. Restore
@@ -77,7 +80,7 @@ class BarcodeWalletView extends WatchUi.View {
 
 	// Update the view
 	function onUpdate(dc) {
-		System.println("> OnUpdate");
+		log.debug("> OnUpdate", null);
 		// Call the parent onUpdate function to redraw the layout
 		View.onUpdate(dc);
 
@@ -94,12 +97,12 @@ class BarcodeWalletView extends WatchUi.View {
 		var size = maxWidth<maxHeight?maxWidth:maxHeight;
 
 		if(_handleErrors(dc)) {
-			System.println("< OnUpdate - error");
+			log.debug("< OnUpdate - error", null);
 			return;
 		}
 
-		var code = Settings.currentCode;
-		System.println("Getting code #" + Settings.currentIndex + " of " + Settings.codes.size() + " : " + code);
+		var code = settings.currentCode;
+		log.debug("Getting code #{} of {} : {}", [settings.currentIndex, settings.codes.size(), code]);
 		if (code == null) {
 			code = new Code(-1, 1, null, null, 0, 0, null);
 		}
@@ -107,11 +110,11 @@ class BarcodeWalletView extends WatchUi.View {
 
 		if (data == null) {
 			displayMessage(dc, code.label + "\n" + WatchUi.loadResource(Rez.Strings.error));
-			System.println("< OnUpdate - no data");
+			log.debug("< OnUpdate - no data", null);
 			return;
 		}
 
-		System.println("Displaying code " + code);
+		log.debug("Displaying code {}", [code]);
 		////////////////////////////////////////////////////////////////
 		// Find font size
 		////////////////////////////////////////////////////////////////
@@ -126,11 +129,11 @@ class BarcodeWalletView extends WatchUi.View {
 			fontIndex++
 		) {
 		}
-		if(Settings.zoom) {
+		if(settings.zoom) {
 			fontIndex++;
 		}
 		var moduleSize = (fontIndex+version) / version.toFloat();
-		System.println("Code will be displayed using font size " + (fontIndex+version));
+		log.debug("Code will be displayed using font size {}", [fontIndex+version]);
 
 		////////////////////////////////////////////////////////////////
 		// Display current code
@@ -142,10 +145,10 @@ class BarcodeWalletView extends WatchUi.View {
 //		dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_WHITE);
 //		dc.drawRectangle((dc.getWidth()-size)/2, (dc.getHeight()-size)/2, size, size);
 
-		if(Settings.forceBacklight) {
+		if(settings.forceBacklight) {
 			Attention.backlight(1.0);
 		}
-		System.println("< OnUpdate");
+		log.debug("< OnUpdate", null);
 		return;
 	}
 
@@ -156,8 +159,8 @@ class BarcodeWalletView extends WatchUi.View {
 	}
 
 	function _handleErrors(dc) {
-		if (Settings.codes == null || Settings.debug || Settings.state == :NO_TOKEN) {
-			switch(Settings.state) {
+		if (settings.codes == null || settings.debug || settings.state == :NO_TOKEN) {
+			switch(settings.state) {
 				case :READY:
 					break;
 				case :WAITING_POSITION:
@@ -167,7 +170,7 @@ class BarcodeWalletView extends WatchUi.View {
 					displayMessage(dc, WatchUi.loadResource(Rez.Strings.loading));
 					return true;
 				case :NO_TOKEN:
-					Settings.currentCode = new Code(
+					settings.currentCode = new Code(
 						-1, 1,
 						WatchUi.loadResource(Rez.Strings.gettingStarted),
 						"https://github.com/macherel/Barcode-Wallet/wiki/Getting-started",
@@ -177,20 +180,20 @@ class BarcodeWalletView extends WatchUi.View {
 					displayMessage(dc, WatchUi.loadResource(Rez.Strings.errorNoToken));
 					return false;
 				case :ERROR:
-					displayMessage(dc, WatchUi.loadResource(Rez.Strings.error) + " " + Settings.responseCode);
+					displayMessage(dc, WatchUi.loadResource(Rez.Strings.error) + " " + settings.responseCode);
 					return true;
 				default:
-					System.println("Unknown state");
+					log.debug("Unknown state : {}", [settings.state]);
 					displayMessage(dc, WatchUi.loadResource(Rez.Strings.errorUnknown));
 					return true;
 			}
 		}
-		if (Settings.codes.size() == 0) {
+		if (settings.codes.size() == 0) {
 			displayMessage(dc, WatchUi.loadResource(Rez.Strings.errorNoBarcode));
 			return true;
 		}
-		if(Settings.currentIndex < 0 || Settings.currentIndex >= Settings.codes.size()) {
-			System.println("Wrong index");
+		if(settings.currentIndex < 0 || settings.currentIndex >= settings.codes.size()) {
+			log.debug("Wrong index", null);
 			displayMessage(dc, WatchUi.loadResource(Rez.Strings.errorUnknown));
 			return true;
 		}
@@ -212,8 +215,8 @@ class BarcodeWalletView extends WatchUi.View {
 			offsetY = (dc.getHeight() - nbLines * fontHeight) / 2;
 		}
 
-		if (Settings.displayLabel) {
-			System.println("Display label");
+		if (settings.displayLabel) {
+			log.debug("Display label", null);
 			dc.setColor (Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
 			dc.drawText(
 				(dc.getWidth()) / 2,
@@ -223,7 +226,7 @@ class BarcodeWalletView extends WatchUi.View {
 				Graphics.TEXT_JUSTIFY_CENTER
 			);
 		}
-		if(Settings.state == :NO_TOKEN) {
+		if(settings.state == :NO_TOKEN) {
 			dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_RED);
 		} else {
 			dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
@@ -238,8 +241,8 @@ class BarcodeWalletView extends WatchUi.View {
 			);
 		}
 
-		if (Settings.displayValue) {
-			System.println("Display Value");
+		if (settings.displayValue) {
+			log.debug("Display Value", null);
 			dc.setColor (Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
 			dc.drawText(
 				(dc.getWidth()) / 2,
@@ -252,7 +255,7 @@ class BarcodeWalletView extends WatchUi.View {
 	}
 
 	function displayMessage(dc, message) {
-		System.println("Display message \"" + message + "\".");
+		log.debug("Display message \"{}\".", [message]);
 		dc.setColor (Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
 		dc.clear();
 		dc.drawText(

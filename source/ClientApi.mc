@@ -6,21 +6,26 @@ import Toybox.Attention;
 
 class ClientApi {
 
-	public function loadUser(token as String, latlng as Dictionary) {
-		var strUrl = "https://data-manager-api.qrcode.macherel.fr/users/" + Settings.token + "/qrcodes?v=" + Settings.version;
+	public static var INSTANCE = new ClientApi();
+
+	private static var settings = Settings.INSTANCE;
+	private static var log = Logger.INSTANCE;
+
+	public function loadUser(token as String, latlng as Dictionary?) {
+		var strUrl = "https://data-manager-api.qrcode.macherel.fr/users/" + settings.token + "/qrcodes?v=" + settings.version;
 		var hasQueryParam = true;
 		if(latlng != null) {
 			strUrl += "?lat=" + latlng[:lat];
 			strUrl += "&lng=" + latlng[:lng];
 			hasQueryParam = true;
 		}
-		if(Settings.size > 0) {
-			strUrl += (hasQueryParam?"&":"?") + "size=" + Settings.size;
+		if(settings.size > 0) {
+			strUrl += (hasQueryParam?"&":"?") + "size=" + settings.size;
 			hasQueryParam = true;
 		}
-		System.println(">>> loadUser - " + strUrl);
-		if(Settings.state != :READY) {
-			Settings.state = :LOADING;
+		log.debug(">>> loadUser - {}", [strUrl]);
+		if(settings.state != :READY) {
+			settings.state = :LOADING;
 		}
 
  		Communications.makeWebRequest(
@@ -41,29 +46,29 @@ class ClientApi {
     //! @param responseCode The server response code
     //! @param data Content from a successful request
     public function onReceive(responseCode as Number, data as Dictionary<String, Object?> or String or Null) as Void {
-		Settings.responseCode = responseCode;
-		System.println(data);
+		settings.responseCode = responseCode;
 		if (responseCode == 200 && data instanceof Array) {
+			log.debug("Loading user data", null);
 			var codes = [];
 			var responseCodes = (data as Array<Dictionary>);
 			for(var i=0; i<responseCodes.size(); i++) {
 				codes.add(Code.fromResponseData(i, responseCodes[i]));
-				System.println("code #" + i + " \"" + responseCodes[i]["name"] + "\" received.");
+				log.debug("code #{} \"{}\" received.", [i, responseCodes[i]["name"]]);
 			}
-			Settings.storeCodes(codes);
+			settings.storeCodes(codes);
 			_vibrate();
-			Settings.state = :READY;
+			settings.state = :READY;
 		} else {
-			Settings.state = :ERROR;
-			System.println("Error while loading user (" + responseCode + ")");
+			settings.state = :ERROR;
+			log.debug("Error while loading user ({})", [responseCode]);
 			// nothing to do, data will be loaded next time
 		}
-		System.println("<<< loadUser");
+		log.debug("<<< loadUser", null);
 		WatchUi.requestUpdate();
 	}
 
 	private function _vibrate() {
-		if (Settings.vibrate && Attention has :vibrate) {
+		if (settings.vibrate && Attention has :vibrate) {
 			Attention.vibrate([new Attention.VibeProfile(50, 1000)]);
 		}
 	}
