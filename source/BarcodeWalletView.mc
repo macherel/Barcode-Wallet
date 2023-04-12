@@ -106,7 +106,7 @@ class BarcodeWalletView extends WatchUi.View {
 		if (code == null) {
 			code = new Code(-1, 1, null, null, 0, 0, null);
 		}
-		var data = code.data;
+		var data = code.data as Array<String>?;
 
 		if (data == null) {
 			displayMessage(dc, code.label + "\n" + WatchUi.loadResource(Rez.Strings.error));

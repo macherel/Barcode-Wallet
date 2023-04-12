@@ -1,3 +1,4 @@
+import Toybox.Lang;
 using Toybox.WatchUi as Ui;
 using Toybox.Application as App;
 
@@ -31,7 +32,7 @@ class BarcodeWalletDelegate extends Ui.BehaviorDelegate {
 		if (settings.codes.size() > 0) {
 			var codesMenu = [];
 			for(var i=0; i<settings.codes.size(); i++) {
-				var code = settings.codes[i];
+				var code = (settings.codes as Array<Code>)[i];
 				codesMenu.add(new DMenuItem(i, code.label, code.value, code));
 			}
 			var view = new DMenu(codesMenu, Ui.loadResource(Rez.Strings.mainMenuTitle));
