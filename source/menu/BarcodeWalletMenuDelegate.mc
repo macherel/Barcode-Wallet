@@ -1,17 +1,21 @@
-using Toybox.WatchUi as Ui;
-using Toybox.Application as App;
+import Toybox.Application;
+import Toybox.WatchUi;
 
-class BarcodeWalletMenuDelegate extends Ui.MenuInputDelegate {
+class BarcodeWalletMenuDelegate extends WatchUi.MenuInputDelegate {
+
+	private static var settings = Settings.INSTANCE;
+	private static var log = Logger.INSTANCE;
 
 	function initialize () {
 		MenuInputDelegate.initialize ();
 	}
 
-	function onMenuItem (item) {
-		System.println("Select code #" + item.id);
-		Settings.zoom = false;
-		Settings.setCurrentIndex(item.id);
-		Settings.currentCode = item.userData;
-		Ui.popView(Ui.SLIDE_IMMEDIATE);
+	function onMenuItem (item) as Void {
+		var menu = item as DMenuItem;
+		log.debug("Select code #{}", [menu.id]);
+		settings.zoom = false;
+		settings.setCurrentIndex(menu.id);
+		settings.currentCode = menu.userData;
+		WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
 	}
 }

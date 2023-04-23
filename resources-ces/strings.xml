@@ -17,6 +17,10 @@
 	<string id="size">Maximum limit (-1 to disable)</string>
 	<string id="usePosition">Seøadit kódy podle délky</string>
 	<string id="vibrate">Vibrovat</string>
+	<string id="version">Version</string>
 	<string id="debug">Ladit</string>
+
+	<string id="version1">1</string>
+	<string id="version2">2</string>
 
 </strings>

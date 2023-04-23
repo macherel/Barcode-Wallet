@@ -3,11 +3,16 @@ using Toybox.WatchUi as Ui;
 
 class BarcodeWalletApp extends Application.AppBase {
 
-	function onPosition(info) {
+	private static var settings = Settings.INSTANCE;
+	private static var log = Logger.INSTANCE;
+
+	private var clientApi = ClientApi.INSTANCE;
+
+	public function onPosition(info as Toybox.Position.Info) as Void {
 		var myLocation = info.position.toDegrees();
-		System.println("Position received : " + myLocation);
-		ClientApi.loadUser(
-			Settings.token,
+		log.debug("Position received : {}", [myLocation]);
+		clientApi.loadUser(
+			settings.token,
 			{
 				:lat => myLocation[0],
 				:lng => myLocation[1]
@@ -27,7 +32,7 @@ class BarcodeWalletApp extends Application.AppBase {
 
     // onStop() is called when your application is exiting
     function onStop(state) {
-		if(Settings.forceBacklight) {
+		if(settings.forceBacklight) {
 			Attention.backlight(true);
 		}
     }
@@ -42,19 +47,18 @@ class BarcodeWalletApp extends Application.AppBase {
         return [ new BarcodeWalletView(), new BarcodeWalletDelegate() ];
     }
 
-	function _initializeSettings() {
-    	Settings.load();
-    	var codes = Settings.codes;
-    	if (Settings.hasToken()) {
-			if(Settings.usePosition) {
-				System.println("Requesting position...");
-				Settings.state = :WAITING_POSITION;
+	private function _initializeSettings() {
+    	settings.load();
+    	if (settings.hasToken()) {
+			if(settings.usePosition) {
+				log.debug("Requesting position...", null);
+				settings.state = :WAITING_POSITION;
 				Position.enableLocationEvents(Position.LOCATION_ONE_SHOT, method(:onPosition));
 			} else {
-    			ClientApi.loadUser(Settings.token, null);
+    			clientApi.loadUser(settings.token, null);
 			}
-    	} else if(Settings.codes == null || Settings.codes.size() == 0) {
-    		Settings.state = :NO_TOKEN;
+    	} else if(settings.codes == null || settings.codes.size() == 0) {
+    		settings.state = :NO_TOKEN;
     	}
     	Ui.requestUpdate();
 	}

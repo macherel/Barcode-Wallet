@@ -1,63 +1,74 @@
-using Toybox.Communications as Comm;
-using Toybox.WatchUi as Ui;
-using Toybox.Lang as Lang;
-using Toybox.System as System;
-using Toybox.Attention as Attention;
+import Toybox.Communications;
+import Toybox.WatchUi;
+import Toybox.Lang;
+import Toybox.System;
+import Toybox.Attention;
 
-module ClientApi {
-	function _onUserLoaded(responseCode, data) {
-		Settings.responseCode = responseCode;
-		if (responseCode == 200 && data != null) {
-			var codes = [];
-			var responseCodes = data;
-			for(var i=0; i<responseCodes.size(); i++) {
-				codes.add(Code.fromResponseData(i, responseCodes[i]));
-				System.println("code #" + i + " \"" + responseCodes[i]["name"] + "\" received.");
-			}
-			Settings.storeCodes(codes);
-			_vibrate();
-			Settings.state = :READY;
-		} else {
-			Settings.state = :ERROR;
-			System.println("Error while loading user (" + responseCode + ")");
-			// nothing to do, data will be loaded next time
-		}
-		System.println("<<< loadUser");
-		Ui.requestUpdate();
-	}
-	
-	function loadUser(token, latlng) {
-		var strUrl = "https://data-manager-api.qrcode.macherel.fr/users/" + Settings.token + "/qrcodes?v=" + Settings.version;
+class ClientApi {
+
+	public static var INSTANCE = new ClientApi();
+
+	private static var settings = Settings.INSTANCE;
+	private static var log = Logger.INSTANCE;
+
+	public function loadUser(token as String, latlng as Dictionary?) {
+		var strUrl = "https://data-manager-api.qrcode.macherel.fr/users/" + settings.token + "/qrcodes?v=" + settings.version;
 		var hasQueryParam = true;
 		if(latlng != null) {
 			strUrl += "?lat=" + latlng[:lat];
 			strUrl += "&lng=" + latlng[:lng];
 			hasQueryParam = true;
 		}
-		if(Settings.size > 0) {
-			strUrl += (hasQueryParam?"&":"?") + "size=" + Settings.size;
+		if(settings.size > 0) {
+			strUrl += (hasQueryParam?"&":"?") + "size=" + settings.size;
 			hasQueryParam = true;
 		}
-		System.println(">>> loadUser - " + strUrl);
-		if(Settings.state != :READY) {
-			Settings.state = :LOADING;
+		log.debug(">>> loadUser - {}", [strUrl]);
+		if(settings.state != :READY) {
+			settings.state = :LOADING;
 		}
-		Comm.makeWebRequest(
+
+ 		Communications.makeWebRequest(
 			strUrl,
-			null,
+			{},
 			{
-				:methods => Comm.HTTP_REQUEST_METHOD_GET,
+				:methods => Communications.HTTP_REQUEST_METHOD_GET,
 				:headers => {
-					"Content-Type" => Comm.REQUEST_CONTENT_TYPE_JSON
+					"Content-Type" => Communications.REQUEST_CONTENT_TYPE_JSON
 				},
-				:responseType => Comm.HTTP_RESPONSE_CONTENT_TYPE_JSON
+				:responseType => Communications.HTTP_RESPONSE_CONTENT_TYPE_JSON
 			},
-			new Lang.Method(ClientApi, :_onUserLoaded)
+			method(:onReceive)
 		);
 	}
-	
-	function _vibrate() {
-		if (Settings.vibrate && Attention has :vibrate) {
+
+	//! Receive the data from the web request
+    //! @param responseCode The server response code
+    //! @param data Content from a successful request
+    public function onReceive(responseCode as Number, data as Dictionary<String, Object?> or String or Null) as Void {
+		settings.responseCode = responseCode;
+		if (responseCode == 200 && data instanceof Array) {
+			log.debug("Loading user data", null);
+			var codes = [];
+			var responseCodes = (data as Array<Dictionary>);
+			for(var i=0; i<responseCodes.size(); i++) {
+				codes.add(Code.fromResponseData(i, responseCodes[i]));
+				log.debug("code #{} \"{}\" received.", [i, responseCodes[i]["name"]]);
+			}
+			settings.storeCodes(codes);
+			_vibrate();
+			settings.state = :READY;
+		} else {
+			settings.state = :ERROR;
+			log.debug("Error while loading user ({})", [responseCode]);
+			// nothing to do, data will be loaded next time
+		}
+		log.debug("<<< loadUser", null);
+		WatchUi.requestUpdate();
+	}
+
+	private function _vibrate() {
+		if (settings.vibrate && Attention has :vibrate) {
 			Attention.vibrate([new Attention.VibeProfile(50, 1000)]);
 		}
 	}
