@@ -227,16 +227,18 @@ class BarcodeWalletView extends WatchUi.View {
 			);
 		}
 		if(settings.state == :NO_TOKEN) {
-			dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_RED);
+			dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_WHITE);
 		} else {
-			dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
+			dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
 		}
 		for(var i=0; i<nbLines; i++) {
+			var line = data.size() == 1 ? data[0] : data[i]; // For barcode, repeat the first raw
+			log.debug("Displaying line #{} : {}", [i, line]);
 			dc.drawText(
 					(dc.getWidth()) / 2,
 					offsetY + (i * fontHeight),
 					font,
-					data.size() == 1 ? data[0] : data[i], // For barcode, repeat the first raw
+					line,
 					Graphics.TEXT_JUSTIFY_CENTER
 			);
 		}
