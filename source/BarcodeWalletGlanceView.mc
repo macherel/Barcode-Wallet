@@ -2,7 +2,7 @@ import Toybox.Lang;
 import Toybox.WatchUi;
 import Toybox.Graphics;
 
-class BarcodeWalletView extends WatchUi.View {
+class BarcodeWalletGlanceView extends WatchUi.GlanceView {
 
 	private static var settings = Settings.INSTANCE;
 	private static var log = Logger.INSTANCE;
@@ -10,14 +10,14 @@ class BarcodeWalletView extends WatchUi.View {
 	var qrCodeFonts as Array<Array<Resource>> = [];
 
 	function initialize() {
-		View.initialize();
+		GlanceView.initialize();
 	}
 
 	// Load your resources here
 	function onLayout(dc) {
 		log.debug("> onLayout", null);	
 
-		var qrCodeFont1 = [
+		qrCodeFonts = [
 			WatchUi.loadResource(Rez.Fonts.qrcode1_1),
 			WatchUi.loadResource(Rez.Fonts.qrcode1_2),
 			WatchUi.loadResource(Rez.Fonts.qrcode1_3),
@@ -25,50 +25,8 @@ class BarcodeWalletView extends WatchUi.View {
 			WatchUi.loadResource(Rez.Fonts.qrcode1_5),
 			WatchUi.loadResource(Rez.Fonts.qrcode1_6),
 			WatchUi.loadResource(Rez.Fonts.qrcode1_7),
-			WatchUi.loadResource(Rez.Fonts.qrcode1_8),
-			WatchUi.loadResource(Rez.Fonts.qrcode1_9),
-			WatchUi.loadResource(Rez.Fonts.qrcode1_10),
-			WatchUi.loadResource(Rez.Fonts.qrcode1_11),
-			WatchUi.loadResource(Rez.Fonts.qrcode1_12),
-			WatchUi.loadResource(Rez.Fonts.qrcode1_13),
-			WatchUi.loadResource(Rez.Fonts.qrcode1_14),
-			WatchUi.loadResource(Rez.Fonts.qrcode1_15),
-			WatchUi.loadResource(Rez.Fonts.qrcode1_16)
+			WatchUi.loadResource(Rez.Fonts.qrcode1_8)
 		];
-		var qrCodeFont2 = [
-			WatchUi.loadResource(Rez.Fonts.qrcode2_2),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_3),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_4),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_5),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_6),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_7),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_8),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_9),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_10),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_11),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_12),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_13),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_14),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_15),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_16),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_17),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_18),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_19),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_20),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_21),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_22),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_23),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_24),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_25),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_26),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_27),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_28),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_29),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_30),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_31),
-			WatchUi.loadResource(Rez.Fonts.qrcode2_32)
-		];
-		qrCodeFonts = [ qrCodeFont1, qrCodeFont2 ];
 		log.debug("< onLayout", null);
 	}
 
@@ -84,17 +42,8 @@ class BarcodeWalletView extends WatchUi.View {
 		// Call the parent onUpdate function to redraw the layout
 		View.onUpdate(dc);
 
-		var dcWidth = dc.getWidth();
-		var dcHeight = dc.getHeight();
-		var maxWidth = dcWidth  * 0.81111;
-		var maxHeight= dcHeight * 0.81111;
-		if (maxWidth == maxHeight) {
-			// For round device... Otherwise image is hidden in corner
-			maxWidth = maxWidth * 0.86;
-			maxHeight = maxHeight * 0.86;
-		}
-
-		var size = maxWidth<maxHeight?maxWidth:maxHeight;
+		var maxWidth = dc.getWidth();
+		var maxHeight= dc.getHeight();
 
 		if(_handleErrors(dc)) {
 			log.debug("< OnUpdate - error", null);
@@ -114,36 +63,39 @@ class BarcodeWalletView extends WatchUi.View {
 			return;
 		}
 
+		var height = maxHeight - dc.getFontHeight(Graphics.FONT_XTINY) / 3;
+		var width = maxWidth - dc.getFontHeight(Graphics.FONT_XTINY) / 3;
+		if(code.height == 1) {
+			height = maxHeight * 0.5;
+		} else {
+			width = height;
+		}
+
 		log.debug("Displaying code {}", [code]);
 		////////////////////////////////////////////////////////////////
 		// Find font size
 		////////////////////////////////////////////////////////////////
-		var version = code.version;
-		var qrCodeFont = qrCodeFonts[version-1];
-		var fontIndex = 1;
+		var fontIndex = 0;
 		// On round watch barcode can be bigger
-		var factor = (maxHeight==maxWidth && data.size()==1) ? 0.8 : 1;			
 		for(fontIndex = 0;
-			fontIndex < qrCodeFont.size()-1 &&
-			(fontIndex+1+version) * data[0].length() <= size/factor + 0.001;
+			fontIndex < qrCodeFonts.size()-1 &&
+			(fontIndex+2) * data[0].length() <= width + 0.001;
 			fontIndex++
 		) {
+			log.debug("fontIndex: {}", [fontIndex]);
 		}
 		if(settings.zoom) {
 			fontIndex++;
 		}
-		var moduleSize = (fontIndex+version) / version.toFloat();
-		log.debug("Code will be displayed using font size {}", [fontIndex+version]);
+		var moduleSize = fontIndex + 1;
+		log.debug("Code will be displayed using font size {}", [fontIndex + 1]);
 
 		////////////////////////////////////////////////////////////////
 		// Display current code
 		////////////////////////////////////////////////////////////////
 		dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
 		dc.clear();
-		_drawQRCode(dc, code, qrCodeFont[fontIndex], moduleSize, version);
-
-//		dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_WHITE);
-//		dc.drawRectangle((dc.getWidth()-size)/2, (dc.getHeight()-size)/2, size, size);
+		_drawQRCode(dc, code, qrCodeFonts[fontIndex], moduleSize);
 
 		if(settings.forceBacklight) {
 			Attention.backlight(1.0);
@@ -200,58 +152,62 @@ class BarcodeWalletView extends WatchUi.View {
 		return false;
 	}
 
-	function _drawQRCode(dc, code as Code, font, moduleSize, version) {
-		var dy = version==1 ? 4 : 2;
+	function _drawQRCode(dc, code as Code, font, moduleSize) {
+		var dy = 4;
 		var fontHeight = moduleSize * dy;
 		var data = code.data;
 		if (!(data instanceof Toybox.Lang.Array)) {
 			return;
 		}
+		var fontColor = Graphics.COLOR_BLACK;
+		var justification = code.height == 1 ? Graphics.TEXT_JUSTIFY_CENTER : Graphics.TEXT_JUSTIFY_LEFT;
 		var offsetY = (dc.getHeight() - code.height * moduleSize) / 2;
+		var offsetX = code.height == 1 ? (dc.getWidth()) / 2 : dc.getFontHeight(Graphics.FONT_XTINY) / 4;
+		var textOffsetX = code.height == 1 ? (dc.getWidth()) / 2 : offsetX + data[0].length() * moduleSize + (dc.getFontHeight(Graphics.FONT_XTINY) / 4);
 		var nbLines = data.size();
 		if (code.height == 1) {
+			if(moduleSize * data[0].length() > dc.getWidth()) {
+				fontColor = Graphics.COLOR_DK_RED;
+			}
 			var barcodeHeight = dc.getHeight() / 3;
-			nbLines = barcodeHeight / moduleSize / dy;
+			nbLines = barcodeHeight / moduleSize / 4;
 			offsetY = (dc.getHeight() - nbLines * fontHeight) / 2;
+		} else {
+			if(moduleSize * data[0].length() > dc.getHeight()) {
+				fontColor = Graphics.COLOR_DK_RED;
+			}
 		}
 
-		if (settings.displayLabel) {
-			log.debug("Display label", null);
-			dc.setColor (Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
-			dc.drawText(
-				(dc.getWidth()) / 2,
-				offsetY - dc.getFontHeight(Graphics.FONT_TINY),
-				Graphics.FONT_TINY,
-				code.label,
-				Graphics.TEXT_JUSTIFY_CENTER
-			);
-		}
+		dc.setColor (fontColor, Graphics.COLOR_WHITE);
+		dc.drawText(
+			textOffsetX,
+			code.height == 1 ? offsetY - dc.getFontHeight(Graphics.FONT_XTINY) : (dc.getHeight() / 2) - dc.getFontHeight(Graphics.FONT_XTINY),
+			Graphics.FONT_XTINY,
+			code.label,
+			justification
+		);
+		dc.drawText(
+			textOffsetX,
+			code.height == 1 ? offsetY + (nbLines * dy * moduleSize) : (dc.getHeight() / 2),
+			Graphics.FONT_XTINY,
+			code.value,
+			justification
+		);
+
 		if(settings.state == :NO_TOKEN) {
 			dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_WHITE);
 		} else {
-			dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
+			dc.setColor(fontColor, Graphics.COLOR_WHITE);
 		}
 		for(var i=0; i<nbLines; i++) {
-			var line = data.size() == 1 ? data[0] : data[i]; // For barcode, repeat the first raw
+			var line = code.height == 1 ? data[0] : data[i]; // For barcode, repeat the first raw
 			log.debug("Displaying line #{} : {}", [i, line]);
 			dc.drawText(
-					(dc.getWidth()) / 2,
+					offsetX,
 					offsetY + (i * fontHeight),
 					font,
 					line,
-					Graphics.TEXT_JUSTIFY_CENTER
-			);
-		}
-
-		if (settings.displayValue) {
-			log.debug("Display Value", null);
-			dc.setColor (Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
-			dc.drawText(
-				(dc.getWidth()) / 2,
-				offsetY + ((data.size() == 1 ? nbLines * dy : data[0].length()) * moduleSize),
-				Graphics.FONT_XTINY,
-				code.value,
-				Graphics.TEXT_JUSTIFY_CENTER
+					justification
 			);
 		}
 	}
