@@ -3,7 +3,7 @@
 <iq:manifest xmlns:iq="http://www.garmin.com/xml/connectiq" version="3">
     <iq:application entry="BarcodeWalletApp" launcherIcon="@Drawables.LauncherIcon" name="@Strings.AppName" minSdkVersion="1.4.0"
     type="watch-app" id="fc6348ad521048df9dd3cce68cf93dc4"
-    version="2.0.0">
+    version="2.0.1">
         <iq:products>
             <iq:product id="approachs60"/>
             <iq:product id="approachs62"/>
