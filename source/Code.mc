@@ -37,7 +37,7 @@ class Code {
 		self.data = data;
 	}
 
-	function fromResponseData(id, data as Dictionary) {
+	static function fromResponseData(id, data as Dictionary) {
 		return new Code(
 			id,
 			data["version"],

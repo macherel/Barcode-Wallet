@@ -121,7 +121,7 @@ class DMenu extends WatchUi.View
 	function onShow ()
 	{
 		drawMenu = new DrawMenu ();
-		if(Settings.forceBacklight) {
+		if(Settings.INSTANCE.forceBacklight) {
 			Attention.backlight(true);
 		}
 	}
