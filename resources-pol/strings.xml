@@ -1,6 +1,6 @@
 <strings>
     <string id="AppName">Barcode Wallet</string>
-	<string id="mainMenuTitle">Wybierz kod kreskowy</string>
+	<string id="mainMenuTitle">Wybierz kod</string>
 
 	<string id="loading">Wczytywanie...</string>
 	<string id="waitingPosition">Czekam na&#xA;lokalizację...</string>
