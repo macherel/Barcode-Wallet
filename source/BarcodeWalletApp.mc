@@ -47,6 +47,11 @@ class BarcodeWalletApp extends Application.AppBase {
         return [ new BarcodeWalletView(), new BarcodeWalletDelegate() ];
     }
 
+    // Return the glance view of your application here
+    function getGlanceView() {
+        return [ new BarcodeWalletGlanceView() ];
+    }
+
 	private function _initializeSettings() {
     	settings.load();
     	if (settings.hasToken()) {
