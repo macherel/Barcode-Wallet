@@ -1,0 +1,26 @@
+<strings>
+    <string id="AppName">Barcode Wallet</string>
+	<string id="mainMenuTitle">Barcode wählen</string>
+
+	<string id="loading">Laden...</string>
+	<string id="waitingPosition">Warten auf&#xA;Position...</string>
+	<string id="error">Fehler</string>
+	<string id="errorNoBarcode">Kein Barcode</string>
+	<string id="errorNoToken">Bitte&#xA;Entwickler&#xA;kontaktieren</string>
+	<string id="errorUnknown">Unbekannter Fehler</string>
+	<string id="gettingStarted">Erste Schritte</string>
+
+	<string id="token">Token</string>
+	<string id="displayLabel">Name anzeigen</string>
+	<string id="displayValue">Wert anzeigen</string>
+	<string id="forceBacklight">Hintergrundbeleuchtung erzwingen</string>
+	<string id="size">Obergrenze (-1 zum Deaktivieren)</string>
+	<string id="usePosition">Codes nach Entfernung sortieren</string>
+	<string id="vibrate">Vibrieren</string>
+	<string id="version">Version</string>
+	<string id="debug">Debug</string>
+
+	<string id="version1">1</string>
+	<string id="version2">2</string>
+
+</strings>
