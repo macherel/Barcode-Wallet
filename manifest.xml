@@ -28,6 +28,7 @@
             <iq:product id="edge1030bontrager"/>
             <iq:product id="edge1030plus"/>
             <iq:product id="edge1040"/>
+            <iq:product id="edge1050"/>
             <iq:product id="edge520plus"/>
             <iq:product id="edge530"/>
             <iq:product id="edge540"/>
@@ -39,6 +40,7 @@
             <iq:product id="edgeexplore"/>
             <iq:product id="edgeexplore2"/>
             <iq:product id="enduro"/>
+            <iq:product id="enduro3"/>
             <iq:product id="epix2"/>
             <iq:product id="epix2pro42mm"/>
             <iq:product id="epix2pro47mm"/>
@@ -64,7 +66,12 @@
             <iq:product id="fenix7x"/>
             <iq:product id="fenix7xpro"/>
             <iq:product id="fenix7xpronowifi"/>
+            <iq:product id="fenix843mm"/>
+            <iq:product id="fenix847mm"/>
+            <iq:product id="fenix8solar47mm"/>
+            <iq:product id="fenix8solar51mm"/>
             <iq:product id="fenixchronos"/>
+            <iq:product id="fenixe"/>
             <iq:product id="fr165"/>
             <iq:product id="fr165m"/>
             <iq:product id="fr230"/>
@@ -139,16 +146,16 @@
             <iq:uses-permission id="Positioning"/>
         </iq:permissions>
         <iq:languages>
-            <iq:language>zhs</iq:language>
             <iq:language>ces</iq:language>
-            <iq:language>gre</iq:language>
+            <iq:language>deu</iq:language>
             <iq:language>eng</iq:language>
             <iq:language>fre</iq:language>
+            <iq:language>gre</iq:language>
             <iq:language>hun</iq:language>
             <iq:language>pol</iq:language>
             <iq:language>slo</iq:language>
             <iq:language>spa</iq:language>
-            <iq:language>deu</iq:language>
+            <iq:language>zhs</iq:language>
         </iq:languages>
         <iq:barrels/>
     </iq:application>
