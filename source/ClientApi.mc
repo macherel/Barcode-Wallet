@@ -1,8 +1,8 @@
+import Toybox.Attention;
 import Toybox.Communications;
-import Toybox.WatchUi;
 import Toybox.Lang;
 import Toybox.System;
-import Toybox.Attention;
+import Toybox.WatchUi;
 
 class ClientApi {
 
@@ -45,7 +45,7 @@ class ClientApi {
 	//! Receive the data from the web request
     //! @param responseCode The server response code
     //! @param data Content from a successful request
-    public function onReceive(responseCode as Number, data as Dictionary<String, Object?> or String or Null) as Void {
+    public function onReceive(responseCode as Number, data as Dictionary<String, Object?> or String or Toybox.PersistedContent.Iterator or Null) as Void {
 		settings.responseCode = responseCode;
 		if (responseCode == 200 && data instanceof Array) {
 			log.debug("Loading user data", null);
