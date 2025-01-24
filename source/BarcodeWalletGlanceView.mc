@@ -169,7 +169,7 @@ class BarcodeWalletGlanceView extends WatchUi.GlanceView {
 			if(moduleSize * data[0].length() > dc.getWidth()) {
 				fontColor = Graphics.COLOR_DK_RED;
 			}
-			var barcodeHeight = dc.getHeight() / 3;
+			var barcodeHeight = dc.getHeight() * 0.8;
 			nbLines = barcodeHeight / moduleSize / 4;
 			offsetY = (dc.getHeight() - nbLines * fontHeight) / 2;
 		} else {
@@ -177,22 +177,6 @@ class BarcodeWalletGlanceView extends WatchUi.GlanceView {
 				fontColor = Graphics.COLOR_DK_RED;
 			}
 		}
-
-		dc.setColor (fontColor, Graphics.COLOR_WHITE);
-		dc.drawText(
-			textOffsetX,
-			code.height == 1 ? offsetY - dc.getFontHeight(Graphics.FONT_XTINY) : (dc.getHeight() / 2) - dc.getFontHeight(Graphics.FONT_XTINY),
-			Graphics.FONT_XTINY,
-			code.label,
-			justification
-		);
-		dc.drawText(
-			textOffsetX,
-			code.height == 1 ? offsetY + (nbLines * dy * moduleSize) : (dc.getHeight() / 2),
-			Graphics.FONT_XTINY,
-			code.value,
-			justification
-		);
 
 		if(settings.state == :NO_TOKEN) {
 			dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_WHITE);
@@ -208,6 +192,35 @@ class BarcodeWalletGlanceView extends WatchUi.GlanceView {
 					font,
 					line,
 					justification
+			);
+		}
+
+		if (settings.displayLabel) {
+			if(code.height == 1) {
+				dc.setColor (Graphics.COLOR_WHITE, Graphics.COLOR_WHITE);
+				dc.fillRectangle(0, 0, dc.getWidth(), dc.getFontHeight(Graphics.FONT_XTINY));
+			}
+			dc.setColor (fontColor, Graphics.COLOR_WHITE);
+			dc.drawText(
+				textOffsetX,
+				code.height == 1 ? 0 : (dc.getHeight() / 2) - dc.getFontHeight(Graphics.FONT_XTINY),
+				Graphics.FONT_XTINY,
+				code.label,
+				justification
+			);
+		}
+		if (settings.displayValue) {
+			if(code.height == 1) {
+				dc.setColor (Graphics.COLOR_WHITE, Graphics.COLOR_WHITE);
+				dc.fillRectangle(0, dc.getHeight() - dc.getFontHeight(Graphics.FONT_XTINY), dc.getWidth(), dc.getFontHeight(Graphics.FONT_XTINY));
+			}
+			dc.setColor (fontColor, Graphics.COLOR_WHITE);
+			dc.drawText(
+				textOffsetX,
+				code.height == 1 ? dc.getHeight() - dc.getFontHeight(Graphics.FONT_XTINY) : (dc.getHeight() / 2),
+				Graphics.FONT_XTINY,
+				code.value,
+				justification
 			);
 		}
 	}
