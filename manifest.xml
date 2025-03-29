@@ -20,6 +20,7 @@
             <iq:product id="d2deltas"/>
             <iq:product id="d2mach1"/>
             <iq:product id="descentg1"/>
+            <iq:product id="descentg2"/>
             <iq:product id="descentmk1"/>
             <iq:product id="descentmk2"/>
             <iq:product id="descentmk2s"/>
@@ -86,6 +87,8 @@
             <iq:product id="fr265"/>
             <iq:product id="fr265s"/>
             <iq:product id="fr55"/>
+            <iq:product id="fr57042mm"/>
+            <iq:product id="fr57047mm"/>
             <iq:product id="fr630"/>
             <iq:product id="fr645"/>
             <iq:product id="fr645m"/>
@@ -97,6 +100,7 @@
             <iq:product id="fr945lte"/>
             <iq:product id="fr955"/>
             <iq:product id="fr965"/>
+            <iq:product id="fr970"/>
             <iq:product id="gpsmap66"/>
             <iq:product id="gpsmap67"/>
             <iq:product id="gpsmap86"/>
@@ -145,6 +149,7 @@
             <iq:product id="vivoactive4"/>
             <iq:product id="vivoactive4s"/>
             <iq:product id="vivoactive5"/>
+            <iq:product id="vivoactive6"/>
             <iq:product id="vivoactive_hr"/>
         </iq:products>
         <iq:permissions>
