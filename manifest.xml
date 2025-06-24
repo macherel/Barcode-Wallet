@@ -41,6 +41,7 @@
             <iq:product id="edge_520"/>
             <iq:product id="edgeexplore"/>
             <iq:product id="edgeexplore2"/>
+            <iq:product id="edgemtb"/>
             <iq:product id="enduro"/>
             <iq:product id="enduro3"/>
             <iq:product id="epix2"/>
@@ -141,6 +142,7 @@
             <iq:product id="venusq2"/>
             <iq:product id="venusq2m"/>
             <iq:product id="venusqm"/>
+            <iq:product id="venux1"/>
             <iq:product id="vivoactive"/>
             <iq:product id="vivoactive3"/>
             <iq:product id="vivoactive3d"/>
