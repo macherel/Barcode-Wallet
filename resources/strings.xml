@@ -19,6 +19,7 @@
 	<string id="vibrate">Vibrate</string>
 	<string id="version">Version</string>
 	<string id="debug">Debug</string>
+	<string id="serverUrl">Server</string>
 
 	<string id="version1">1</string>
 	<string id="version2">2</string>

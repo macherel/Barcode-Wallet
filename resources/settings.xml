@@ -37,5 +37,8 @@
 	<setting propertyKey="@Properties.debug" title="@Strings.debug">
 		<settingConfig type="boolean" />
 	</setting>
+	<setting propertyKey="@Properties.serverUrl" title="@Strings.serverUrl">
+		<settingConfig type="url" />
+	</setting>
 
 </settings>

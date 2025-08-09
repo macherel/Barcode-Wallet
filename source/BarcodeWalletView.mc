@@ -159,17 +159,17 @@ class BarcodeWalletView extends WatchUi.View {
 	}
 
 	function _handleErrors(dc) {
-		if (settings.codes == null || settings.debug || settings.state == :NO_TOKEN) {
+		if (settings.codes == null || settings.debug || settings.state == State.NO_TOKEN) {
 			switch(settings.state) {
-				case :READY:
+				case State.READY:
 					break;
-				case :WAITING_POSITION:
+				case State.WAITING_POSITION:
 					displayMessage(dc, WatchUi.loadResource(Rez.Strings.waitingPosition));
 					return true;
-				case :LOADING:
+				case State.LOADING:
 					displayMessage(dc, WatchUi.loadResource(Rez.Strings.loading));
 					return true;
-				case :NO_TOKEN:
+				case State.NO_TOKEN:
 					settings.currentCode = new Code(
 						-1, 1,
 						WatchUi.loadResource(Rez.Strings.gettingStarted),
@@ -179,7 +179,7 @@ class BarcodeWalletView extends WatchUi.View {
 					);
 					displayMessage(dc, WatchUi.loadResource(Rez.Strings.errorNoToken));
 					return false;
-				case :ERROR:
+				case State.ERROR:
 					displayMessage(dc, WatchUi.loadResource(Rez.Strings.error) + " " + settings.responseCode);
 					return true;
 				default:
@@ -226,7 +226,7 @@ class BarcodeWalletView extends WatchUi.View {
 				Graphics.TEXT_JUSTIFY_CENTER
 			);
 		}
-		if(settings.state == :NO_TOKEN) {
+		if(settings.state == State.NO_TOKEN) {
 			dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_WHITE);
 		} else {
 			dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);

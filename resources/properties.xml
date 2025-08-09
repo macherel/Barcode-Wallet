@@ -1,4 +1,5 @@
 <properties>
+	<property id="serverUrl" type="string"></property>
 	<property id="token" type="string"></property>
 	<property id="displayLabel" type="boolean">false</property>
 	<property id="displayValue" type="boolean">false</property>

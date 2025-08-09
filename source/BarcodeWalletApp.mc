@@ -11,13 +11,10 @@ class BarcodeWalletApp extends Application.AppBase {
 	public function onPosition(info as Toybox.Position.Info) as Void {
 		var myLocation = info.position.toDegrees();
 		log.debug("Position received : {}", [myLocation]);
-		clientApi.loadUser(
-			settings.token,
-			{
-				:lat => myLocation[0],
-				:lng => myLocation[1]
-			}
-		);
+		clientApi.loadUser({
+			:lat => myLocation[0],
+			:lng => myLocation[1]
+		});
     	Ui.requestUpdate();
 	}
 
@@ -57,13 +54,13 @@ class BarcodeWalletApp extends Application.AppBase {
     	if (settings.hasToken()) {
 			if(settings.usePosition) {
 				log.debug("Requesting position...", null);
-				settings.state = :WAITING_POSITION;
+				settings.state = State.WAITING_POSITION;
 				Position.enableLocationEvents(Position.LOCATION_ONE_SHOT, method(:onPosition));
 			} else {
-    			clientApi.loadUser(settings.token, null);
+    			clientApi.loadUser(null);
 			}
     	} else if(settings.codes == null || settings.codes.size() == 0) {
-    		settings.state = :NO_TOKEN;
+    		settings.state = State.NO_TOKEN;
     	}
     	Ui.requestUpdate();
 	}

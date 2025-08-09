@@ -11,21 +11,28 @@ class ClientApi {
 	private static var settings = Settings.INSTANCE;
 	private static var log = Logger.INSTANCE;
 
-	public function loadUser(token as String, latlng as Dictionary?) {
-		var strUrl = "https://data-manager-api.qrcode.macherel.fr/users/" + settings.token + "/qrcodes?v=" + settings.version;
-		var hasQueryParam = true;
+	private function getServerUrl(latlng as Dictionary?) {
+		var serverUrl = settings.serverUrl;
+		if(isNullOrEmpty(serverUrl)) {
+			serverUrl = "https://data-manager-api.qrcode.macherel.fr/users/{TOKEN}/qrcodes?v=" + settings.version;
+		}
+		serverUrl += (serverUrl.find("?") == null ? "?" : "&") + "v=" + settings.version;
 		if(latlng != null) {
-			strUrl += "?lat=" + latlng[:lat];
-			strUrl += "&lng=" + latlng[:lng];
-			hasQueryParam = true;
+			serverUrl += "&lat=" + latlng[:lat];
+			serverUrl += "&lng=" + latlng[:lng];
 		}
 		if(settings.size > 0) {
-			strUrl += (hasQueryParam?"&":"?") + "size=" + settings.size;
-			hasQueryParam = true;
+			serverUrl += "&size=" + settings.size;
 		}
+
+		return stringReplace(serverUrl, "{TOKEN}", settings.token);
+	}
+
+	public function loadUser(latlng as Dictionary?) {
+		var strUrl = getServerUrl(latlng);
 		log.debug(">>> loadUser - {}", [strUrl]);
-		if(settings.state != :READY) {
-			settings.state = :LOADING;
+		if(settings.state != State.READY) {
+			settings.state = State.LOADING;
 		}
 
  		Communications.makeWebRequest(
@@ -57,9 +64,9 @@ class ClientApi {
 			}
 			settings.storeCodes(codes);
 			_vibrate();
-			settings.state = :READY;
+			settings.state = State.READY;
 		} else {
-			settings.state = :ERROR;
+			settings.state = State.ERROR;
 			log.debug("Error while loading user ({})", [responseCode]);
 			// nothing to do, data will be loaded next time
 		}

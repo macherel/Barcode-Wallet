@@ -10,6 +10,7 @@ class Settings {
 
 	private static var log = Logger.INSTANCE;
 
+	public var serverUrl;
 	public var debug = false;
 	public var version = 1;
 	public var token;
@@ -22,7 +23,7 @@ class Settings {
 	public var vibrate = true;
 	public var currentIndex = -1;
 	public var currentCode as Code? = null;
-	public var state = :UNKNOWN; // UNKNOWN, READY, ERROR, LOADING, NO_TOKEN
+	public var state = State.UNKNOWN; // UNKNOWN, READY, ERROR, LOADING, NO_TOKEN
 	public var responseCode = null;
 	public var zoom = false;
 
@@ -39,7 +40,7 @@ class Settings {
 		currentIndex = index;
 		currentCode = _getCurrentCode();
 		setProperty("currentIndex", index);
-		state = :READY;
+		state = State.READY;
 	}
 	
 	private function _getCurrentCode() {
@@ -50,7 +51,7 @@ class Settings {
 	}
 
 	public function load() {
-
+		serverUrl = getProperty("serverUrl");
 		size = getProperty("size");
 		codes = _loadCodes();
 		token = getProperty("token");
